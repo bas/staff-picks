@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@primer/react";
+import { withLDProvider } from "launchdarkly-react-client-sdk";
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -8,4 +9,10 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-export default App;
+export default withLDProvider({
+  clientSideID: "62cffb19c2a94210d39fad35",
+  user: { anonymous: true },
+  options: {
+    bootstrap: "localStorage",
+  },
+})(App);

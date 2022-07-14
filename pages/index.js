@@ -6,6 +6,7 @@ import {
   Pagehead,
   Text,
 } from "@primer/react";
+import Head from 'next/head'
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
 import { useFlags } from "launchdarkly-react-client-sdk";
@@ -56,6 +57,9 @@ function App() {
   return (
     <div className="App">
       <BaseStyles>
+        <Head>
+          <title>{ffPageHead}</title>
+        </Head>
         <PageLayout>
           <PageLayout.Header>
             <Header>

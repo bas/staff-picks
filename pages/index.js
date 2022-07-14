@@ -8,8 +8,10 @@ import {
 } from "@primer/react";
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 function App() {
+  const { ffPageHead } = useFlags();
   const allBooks = [
     {
       title: "Scrum: The Art of Doing Twice the Work in Half the Time",
@@ -27,7 +29,8 @@ function App() {
       rating: 4,
     },
     {
-      title: "Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations",
+      title:
+        "Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations",
       author: "Nicole Forsgren and Jez Humble",
       cover: "/images/accelerate.jpg",
       price: "17.99",
@@ -66,7 +69,7 @@ function App() {
                 <Header.Link href="#">About</Header.Link>
               </Header.Item>
             </Header>
-            <Pagehead sx={{ fontSize: 3, mb: 1 }}>Staff picks</Pagehead>
+            <Pagehead sx={{ fontSize: 3, mb: 1 }}>{ffPageHead}</Pagehead>
           </PageLayout.Header>
           <PageLayout.Content>
             <Box height={500}>
@@ -76,7 +79,8 @@ function App() {
           <PageLayout.Footer>
             <Box>
               <Text sx={{ fontSize: 1, textAlign: "center" }} as="p" ali>
-                Made with <HeartFillIcon size={16} fill="red" /> by avid readers.
+                Made with <HeartFillIcon size={16} fill="red" /> by avid
+                readers.
               </Text>
             </Box>
           </PageLayout.Footer>

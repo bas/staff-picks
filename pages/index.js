@@ -27,11 +27,11 @@ function App() {
       rating: 4,
     },
     {
-      title: "Crossing the Chasm",
-      author: "Geoffrey A. Moore",
-      cover: "/images/chasm.jpg",
-      price: "10.99",
-      rating: 3,
+      title: "Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations",
+      author: "Nicole Forsgren and Jez Humble",
+      cover: "/images/accelerate.jpg",
+      price: "17.99",
+      rating: 5,
     },
     {
       title: "The Mythical Man-Month: Essays on Software Engineering",

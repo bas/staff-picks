@@ -23,7 +23,7 @@ function BookList({ allBooks }) {
               </Text>
             </Box>
             <Box>
-              <Text sx={{ fontSize: 1}}>{book.author}</Text>
+              <Text sx={{ fontSize: 1}}>By {book.author}</Text>
             </Box>
             <Box>
               <Text sx={{ fontSize: 1 }}>&euro;{book.price}</Text>

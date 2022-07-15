@@ -11,7 +11,7 @@ const App = ({ Component, pageProps }) => {
 
 export default withLDProvider({
   clientSideID: "62cffb19c2a94210d39fad35",
-  user: { anonymous: true },
+  user: { key: "anon", anonymous: true },
   options: {
     bootstrap: "localStorage",
   },

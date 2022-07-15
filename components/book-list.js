@@ -2,6 +2,7 @@ import { Box, Text, Button } from "@primer/react";
 import { StarFillIcon } from "@primer/octicons-react";
 import Image from "next/image";
 import { useFlags } from "launchdarkly-react-client-sdk";
+import BookRating from "./book-rating";
 
 function BookList({ allBooks }) {
   const { ffBookRating } = useFlags();
@@ -37,18 +38,7 @@ function BookList({ allBooks }) {
               </Button>
             </Box>
             {/* if ffBookRating returns true show the book rating */}
-            {ffBookRating && (
-              <Box pt={6}>
-                <Text as="span" sx={{ fontSize: 1 }}>
-                  Rating:
-                </Text>
-                <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>
-                  {[...Array(book.rating)].map((e, i) => (
-                    <StarFillIcon key={i} size={16} fill="#FFD700" />
-                  ))}
-                </Text>
-              </Box>
-            )}
+            {ffBookRating && <BookRating stars={book.rating} />}
             {/* End of ffBookRating block */}
           </Box>
         </Box>

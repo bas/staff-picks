@@ -14,5 +14,6 @@ export default withLDProvider({
   user: { key: "anon", anonymous: true },
   options: {
     bootstrap: "localStorage",
+    useCamelCaseFlagKeys: false,
   },
 })(App);

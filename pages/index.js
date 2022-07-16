@@ -13,11 +13,13 @@ import { useState } from "react";
 import Head from "next/head";
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
-import { useFlags } from "launchdarkly-react-client-sdk";
+import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 
 function App() {
   const { ffPageHead, ffLogin } = useFlags();
   const [email, setEmail] = useState("");
+  const ldClient = useLDClient();
+
   const allBooks = [
     {
       title: "Scrum: The Art of Doing Twice the Work in Half the Time",
@@ -59,6 +61,18 @@ function App() {
     },
   ];
 
+  async function onSubmit() {
+    console.log("sign in with email: ", email);
+    if (ldClient) {
+      const identity = {
+        key: email,
+      };
+      ldClient.identify(identity, null, () => {
+        console.log("New user's flags available");
+      });
+    }
+  }
+
   return (
     <div className="App">
       <BaseStyles>
@@ -78,26 +92,23 @@ function App() {
                 <Header.Link href="#">About</Header.Link>
               </Header.Item>
               {ffLogin && (
-              <Header.Item>
-                <Box display="flex">
-                  <Box flexGrow={1}>
-                    <TextInput
-                      aria-label="Email"
-                      name="email"
-                      placeholder="Email"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                <Header.Item>
+                  <Box display="flex">
+                    <Box flexGrow={1}>
+                      <TextInput
+                        aria-label="Email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Box>
+                    <Box>
+                      <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
+                        Sign in
+                      </Button>
+                    </Box>
                   </Box>
-                  <Box>
-                    <Button
-                      sx={{ marginLeft: ".5rem" }}
-                      onClick={() => console.log("sign in with email: ", email)}
-                    >
-                      Sign in
-                    </Button>
-                  </Box>
-                </Box>
-              </Header.Item>
+                </Header.Item>
               )}
             </Header>
             <Pagehead sx={{ fontSize: 3, mb: 1 }}>{ffPageHead}</Pagehead>

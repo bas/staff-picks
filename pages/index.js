@@ -70,6 +70,9 @@ function App() {
       ldClient.identify(identity, null, () => {
         console.log("New user's flags available");
       });
+
+      const userFlags = ldClient.allFlags();
+      console.log(userFlags);
     }
   }
 

@@ -22,7 +22,6 @@ jobs:
     
   production:
     needs: [ci]
-    environment: Production
     runs-on: ubuntu-latest
 
     steps:

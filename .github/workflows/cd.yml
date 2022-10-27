@@ -10,7 +10,7 @@ on:
 
 env:
   AWS_REGION: eu-west-1
-  BUCKET_NAME_PROD: staff-picks
+  BUCKET_NAME_PROD: bas-staff-picks-demo
 
 permissions:
   id-token: write

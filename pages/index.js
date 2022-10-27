@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   Button,
-  FormControl,
 } from "@primer/react";
 import { useState } from "react";
 import Head from "next/head";

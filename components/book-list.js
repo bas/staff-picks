@@ -5,6 +5,9 @@ import { useFlags } from "launchdarkly-react-client-sdk";
 
 function BookList({ allBooks }) {
   const { ffBookRating } = useFlags();
+
+  const someValue = true;
+  
   return (
     <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>
       {allBooks.map((book) => (

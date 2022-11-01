@@ -1,0 +1,48 @@
+
+name: Provision Environment
+
+permissions:
+  id-token: write 
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
+    
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Configure AWS credentials (OIDC)
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: eu-west-1 
+
+    - name: Terraform Init
+      run: terraform init
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Terraform validate
+      run: terraform validate
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -var="bucket=${{ env.REPO_NAME }}" -var="project=${{ env.REPO_NAME }}" -var="LAUNCHDARKLY_ACCESS_TOKEN=${{ secrets.LAUNCHDARKLY_ACCESS_TOKEN }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

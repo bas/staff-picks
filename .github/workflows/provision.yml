@@ -45,4 +45,4 @@ jobs:
       run: terraform apply -auto-approve -var="bucket=${{ env.REPO_NAME }}" -var="project=${{ env.REPO_NAME }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LAUNCHDARKLY_ACCESS_TOKEN }}
+        TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}

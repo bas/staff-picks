@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Terraform:
+  terraform:
     name: Terraform Plan & Apply
     runs-on: ubuntu-latest
     
@@ -50,4 +50,15 @@ jobs:
         TF_VAR_bucket: ${{ env.REPO_NAME }}
         TF_VAR_project: ${{ env.REPO_NAME }}
         TF_VAR_region: ${{ env.AWS_REGION }}
-        
+
+  ci:
+    needs: [terraform]
+    uses: ./.github/workflows/ci-job.yml
+  
+  cd:
+    needs: [ci]
+    uses: ./.github/workflows/cd-job.yml
+    with:
+      region: ${{ env.AWS_REGION }}
+      bucket: ${{ env.REPO_NAME }}
+  

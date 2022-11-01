@@ -4,15 +4,24 @@ terraform {
       source  = "launchdarkly/launchdarkly"
       version = "~> 2.0"
     }
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 4.37.0"
+    }
   }
-}
-
-variable "LAUNCHDARKLY_ACCESS_TOKEN" {
-  type = string
+  backend "s3" {
+    bucket = "bas-staff-picks-demo-terraform-state"
+    key    = "bas-staff-picks-demo.tfstate"
+    region = "eu-west-1"
+  }
 }
 
 provider "launchdarkly" {
   access_token = var.LAUNCHDARKLY_ACCESS_TOKEN
+}
+
+provider "aws" {
+  region = var.region
 }
 
 resource "launchdarkly_project" "terraform" {
@@ -117,5 +126,41 @@ resource "launchdarkly_feature_flag" "ff_book_rating" {
   tags = [
     "terraform-managed",   
   ]
+}
+
+resource "aws_s3_bucket" "staff_picks_data_storage" {
+  bucket = var.bucket
+  acl    = "public-read"
+
+  policy = <<POLICY
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicRead",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+          ],
+          "Resource": "arn:aws:s3:::${var.bucket}/*"
+        }
+      ]
+    }
+  POLICY
+
+}
+
+resource "aws_s3_bucket_website_configuration" "staff_picks_pages" {
+  bucket = var.bucket
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
 }
 

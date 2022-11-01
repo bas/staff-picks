@@ -1,0 +1,44 @@
+name: Reusable ci workflow
+
+on:
+  workflow_call:
+  inputs:
+      region:
+        required: true
+        type: string
+      bucket:
+        required: true
+        type: string
+        
+env:
+  AWS_REGION: ${{ inputs.region }}
+  BUCKET_NAME_PROD: ${{ inputs.bucket }}
+
+permissions:
+  id-token: write
+  contents: read
+  
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - uses: actions/download-artifact@v3
+      with:
+        name: staff-picks
+        path: out
+        
+    - name: Configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ secrets.AWS_DEPLOY_PROD_ROLE }}
+        aws-region: ${{ env.AWS_REGION }}
+          
+    - name: Sync s3 bucket
+      run: aws s3 sync ./out s3://${{ env.BUCKET_NAME_PROD }}
+    
+    - name: Add web app url
+      run: echo "http://$BUCKET_NAME_PROD.s3-website-$AWS_REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY

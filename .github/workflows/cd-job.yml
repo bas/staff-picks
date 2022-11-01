@@ -2,7 +2,7 @@ name: Reusable ci workflow
 
 on:
   workflow_call:
-  inputs:
+    inputs:
       region:
         required: true
         type: string

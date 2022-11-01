@@ -10,8 +10,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "bas-staff-picks-demo-terraform-state"
-    key    = "bas-staff-picks-demo.tfstate"
+    bucket = "bas-staff-picks-tfstate"
+    key    = "bas-staff-picks.tfstate"
     region = "eu-west-1"
   }
 }

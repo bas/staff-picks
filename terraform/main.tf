@@ -131,6 +131,7 @@ resource "launchdarkly_feature_flag" "ff_book_rating" {
 resource "aws_s3_bucket" "staff_picks_data_storage" {
   bucket = var.bucket
   acl    = "public-read"
+  force_destroy = true
 
   policy = <<POLICY
     {

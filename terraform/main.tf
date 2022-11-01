@@ -25,8 +25,8 @@ provider "aws" {
 }
 
 resource "launchdarkly_project" "terraform" {
-  key  = "bas-staff-picks-demo"
-  name = "bas-staff-picks-demo"
+  key  = var.project
+  name = var.project
 
   tags = [
     "terraform",

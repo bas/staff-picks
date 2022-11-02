@@ -28,7 +28,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ inputs.region }}
+        aws-region: eu-west-1
 
     - name: Terraform Init
       run: terraform init
@@ -66,7 +66,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ inputs.region }}
+        aws-region: eu-west-1
           
     - name: Sync s3 bucket
       run: aws s3 sync ./out s3://${{ inputs.bucket }}

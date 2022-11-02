@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        default: ${{ env.REPO_NAME }}
+        required: true
       bucket:
         required: true
       region: 

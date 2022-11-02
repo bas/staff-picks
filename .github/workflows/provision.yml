@@ -6,6 +6,13 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+      project:
+        required: true
+      bucket:
+        required: true
+      region: 
+        default: eu-west-1
   
 jobs:
   terraform:
@@ -28,7 +35,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: eu-west-1
+        aws-region: ${{ inputs.region }}
 
     - name: Terraform Init
       run: terraform init
@@ -43,7 +50,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
-        args: '-var-file="dev.tfvars"'
+        TF_VAR_project: ${{ inputs.project }} 
+        TF_VAR_bucket: ${{ inputs.bucket }}
+        TF_VAR_region: ${{ inputs.region }}
 
   ci:
     needs: [terraform]
@@ -66,7 +75,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: eu-west-1
+        aws-region: ${{ inputs.region }}
           
     - name: Sync s3 bucket
       run: aws s3 sync ./out s3://${{ inputs.bucket }}

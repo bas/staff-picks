@@ -47,6 +47,9 @@ function BookList({ allBooks }) {
                   {[...Array(book.rating)].map((e, i) => (
                     <StarFillIcon key={i} size={16} fill="#FFD700" />
                   ))}
+                   {[...Array(5 - book.rating)].map((e, i) => (
+                    <StarFillIcon key={i} size={16} fill="#E5E4E2" />
+                  ))}
                 </Text>
               </Box>
             )}

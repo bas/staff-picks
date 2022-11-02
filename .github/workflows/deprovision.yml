@@ -47,9 +47,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
-        TF_VAR_bucket: ${{ env.REPO_NAME }}
-        TF_VAR_project: ${{ env.REPO_NAME }}
-        TF_VAR_region: ${{ env.AWS_REGION }}
+        args: '-var-file="dev.tfvars"'
 
       
    

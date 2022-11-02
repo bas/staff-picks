@@ -6,10 +6,6 @@ permissions:
 
 on:
   workflow_dispatch:
-
-env:
-  AWS_REGION: eu-west-1
-  REPO_NAME: ${{ github.event.repository.name }}
   
 jobs:
   terraform:
@@ -32,7 +28,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: ${{ inputs.region }}
 
     - name: Terraform Init
       run: terraform init
@@ -47,9 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
-        TF_VAR_bucket: ${{ env.REPO_NAME }}
-        TF_VAR_project: ${{ env.REPO_NAME }}
-        TF_VAR_region: ${{ env.AWS_REGION }}
+        args: '-var-file="dev.tfvars"'
 
   ci:
     needs: [terraform]
@@ -72,10 +66,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: ${{ inputs.region }}
           
     - name: Sync s3 bucket
-      run: aws s3 sync ./out s3://${{ env.REPO_NAME }}
+      run: aws s3 sync ./out s3://${{ inputs.bucket }}
     
     - name: Add web app url
       run: echo "http://$REPO_NAME.s3-website-$AWS_REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY

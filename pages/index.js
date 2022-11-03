@@ -15,7 +15,7 @@ import BookList from "../components/book-list";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 
 function App() {
-  const { ffPageHead, ffLogin } = useFlags();
+  const { ffPageTitle, ffLogin } = useFlags();
   const [email, setEmail] = useState("");
   const ldClient = useLDClient();
 
@@ -79,7 +79,7 @@ function App() {
     <div className="App">
       <BaseStyles>
         <Head>
-          <title>{ffPageHead}</title>
+          <title>{ffPageTitle}</title>
         </Head>
         <PageLayout>
           <PageLayout.Header>
@@ -113,7 +113,7 @@ function App() {
                 </Header.Item>
               )}
             </Header>
-            <Pagehead sx={{ fontSize: 3, mb: 1 }}>{ffPageHead}</Pagehead>
+            <Pagehead sx={{ fontSize: 3, mb: 1 }}>{ffPageTitle}</Pagehead>
           </PageLayout.Header>
           <PageLayout.Content>
             <Box height={500}>

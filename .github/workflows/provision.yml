@@ -77,13 +77,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - uses: actions/download-artifact@v3
+    - name: Download artifact
+      uses: actions/download-artifact@v3
       with:
         name: staff-picks
         path: out
  
-    - name: Show terraform output
-      run: echo ${{ needs.terraform.outputs.client_side_id }}
+    - name: Create .env file
+      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > out/.env
         
     - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1-node16

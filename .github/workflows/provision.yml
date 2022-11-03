@@ -54,8 +54,9 @@ jobs:
 
     - name: Terraform output
       run: |
-        terraform output -raw launchdarkly_client_side_id
-        CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
+        echo terraform output -raw launchdarkly_client_side_id
+        echo "$(terraform output -raw launchdarkly_client_side_id)"
+        CLIENT_SIDE_ID="$(terraform output -raw launchdarkly_client_side_id)"
         echo "$CLIENT_SIDE_ID"
         echo {CLIENT_SIDE_ID}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
       env:
@@ -90,7 +91,7 @@ jobs:
         aws-region: ${{ env.REGION }}
           
     - name: Sync s3 bucket
-      run: aws s3 sync ./out s3://${{ inputs.bucket }}
+      run: aws s3 sync ./out s3://${{ env.BUCKET_NAME }}
     
     - name: Add web app url
       run: echo "http://$REPO_NAME.s3-website-$REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY

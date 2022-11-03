@@ -1,0 +1,84 @@
+name: Provision Environment
+
+permissions:
+  id-token: write 
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        required: true
+      bucket:
+        required: true
+      region: 
+        default: eu-west-1
+  
+jobs:
+  terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+    
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Configure AWS credentials (OIDC)
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
+        aws-region: ${{ inputs.region }}
+
+    - name: Terraform Init
+      run: terraform init
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Terraform validate
+      run: terraform validate
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
+        TF_VAR_project: ${{ inputs.project }} 
+        TF_VAR_bucket: ${{ inputs.bucket }}
+        TF_VAR_region: ${{ inputs.region }}
+
+  ci:
+    needs: [terraform]
+    uses: ./.github/workflows/ci-job.yml
+  
+  cd:
+    needs: [ci]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - uses: actions/download-artifact@v3
+      with:
+        name: staff-picks
+        path: out
+        
+    - name: Configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
+        aws-region: ${{ inputs.region }}
+          
+    - name: Sync s3 bucket
+      run: aws s3 sync ./out s3://${{ inputs.bucket }}
+    
+    - name: Add web app url
+      run: echo "http://$REPO_NAME.s3-website-$AWS_REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY

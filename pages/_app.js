@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }) => {
 };
 
 export default withLDProvider({
-  clientSideID: "635a9aa877d6c11186dd3f8c",
+  clientSideID: process.env.LAUNCHDARKLY_SDK_CLIENT_SIDE_ID,
   user: { key: "anon", anonymous: true },
   options: {
     bootstrap: "localStorage",

@@ -6,6 +6,7 @@ import BookRating from "./book-rating";
 
 function BookList({ allBooks }) {
   const { ffBookRating } = useFlags();
+
   return (
     <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>
       {allBooks.map((book) => (
@@ -38,7 +39,21 @@ function BookList({ allBooks }) {
               </Button>
             </Box>
             {/* if ffBookRating returns true show the book rating */}
-            {ffBookRating && <BookRating stars={book.rating} />}
+            {ffBookRating && (
+              <Box pt={6}>
+                <Text as="span" sx={{ fontSize: 1 }}>
+                  Rating:
+                </Text>
+                <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>
+                  {[...Array(book.rating)].map((e, i) => (
+                    <StarFillIcon key={i} size={16} fill="#FFD700" />
+                  ))}
+                   {[...Array(5 - book.rating)].map((e, i) => (
+                    <StarFillIcon key={i} size={16} fill="#E5E4E2" />
+                  ))}
+                </Text>
+              </Box>
+            )}
             {/* End of ffBookRating block */}
           </Box>
         </Box>

@@ -57,10 +57,11 @@ jobs:
     - name: Terraform output
       run: |
         CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
-        echo {client_side_id}}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
+        echo $CLIENT_SIDE_ID
+        echo {CLIENT_SIDE_ID}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
 
     - name: Show output
-      run: echo "${{ env.client_side_id }}"
+      run: echo "${{ env.CLIENT_SIDE_ID }}"
 
   ci:
     needs: [terraform]

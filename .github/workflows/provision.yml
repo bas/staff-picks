@@ -62,11 +62,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Show output
-      run: echo "Client ID $CLIENT_SIDE_ID"
-      env:
-        CLIENT_SIDE_ID: ${{ env.CLIENT_SIDE_ID }}
-
   ci:
     needs: [terraform]
     uses: ./.github/workflows/ci-job.yml
@@ -83,6 +78,11 @@ jobs:
       with:
         name: staff-picks
         path: out
+ 
+    - name: Show output
+      run: echo "Client ID $CLIENT_SIDE_ID"
+      env:
+        CLIENT_SIDE_ID: ${{ env.CLIENT_SIDE_ID }}
         
     - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1-node16

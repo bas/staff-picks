@@ -28,6 +28,8 @@ jobs:
 
     - name: Terraform Setup
       uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
 
     - name: Configure AWS credentials (OIDC)
       uses: aws-actions/configure-aws-credentials@v1
@@ -54,10 +56,8 @@ jobs:
 
     - name: Terraform output
       run: |
-        echo terraform output -raw launchdarkly_client_side_id
-        echo "$(terraform output -raw launchdarkly_client_side_id)"
-        CLIENT_SIDE_ID="$(terraform output -raw launchdarkly_client_side_id)"
-        echo "$CLIENT_SIDE_ID"
+        CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
+        echo $CLIENT_SIDE_ID
         echo {CLIENT_SIDE_ID}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

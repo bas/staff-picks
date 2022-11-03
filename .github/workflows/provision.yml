@@ -56,13 +56,15 @@ jobs:
       run: |
         terraform output -raw launchdarkly_client_side_id
         CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
-        echo $CLIENT_SIDE_ID
+        echo "$CLIENT_SIDE_ID"
         echo {CLIENT_SIDE_ID}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Show output
-      run: echo ${{ env.CLIENT_SIDE_ID }}
+      run: echo "Client ID $CLIENT_SIDE_ID"
+      env:
+        CLIENT_SIDE_ID: ${{ env.CLIENT_SIDE_ID }}
 
   ci:
     needs: [terraform]
@@ -92,3 +94,7 @@ jobs:
     
     - name: Add web app url
       run: echo "http://$REPO_NAME.s3-website-$REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY
+      env:
+        REPO_NAME: ${{ env.REPO_NAME }}
+        REGION: ${{ env.REGION }}
+        

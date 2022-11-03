@@ -17,6 +17,9 @@ jobs:
     name: Terraform Plan & Apply
     runs-on: ubuntu-latest
     
+    outputs:
+      client_side_id: ${{ steps.tf_output.outputs.client_side_id }}
+      
     defaults:
       run:
         shell: bash
@@ -55,10 +58,10 @@ jobs:
         TF_VAR_region: ${{ env.REGION }}
 
     - name: Terraform output
+      id: tf_output
       run: |
         CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
-        echo $CLIENT_SIDE_ID
-        echo CLIENT_SIDE_ID=$CLIENT_SIDE_ID >> $GITHUB_ENV
+        echo "client_side_id=$CLIENT_SIDE_ID" >> $GITHUB_OUTPUT
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -67,7 +70,7 @@ jobs:
     uses: ./.github/workflows/ci-job.yml
   
   cd:
-    needs: [ci]
+    needs: [terraform, ci]
     runs-on: ubuntu-latest
 
     steps:
@@ -79,10 +82,8 @@ jobs:
         name: staff-picks
         path: out
  
-    - name: Show output
-      run: echo "Client ID $CLIENT_SIDE_ID"
-      env:
-        CLIENT_SIDE_ID: ${{ env.CLIENT_SIDE_ID }}
+    - name: Show terraform output
+      run: echo ${{ needs.terraform.outputs.client_side_id }}
         
     - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1-node16

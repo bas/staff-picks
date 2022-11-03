@@ -56,9 +56,12 @@ jobs:
 
     - name: Terraform output
       run: |
+        terraform output -raw launchdarkly_client_side_id
         CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
         echo $CLIENT_SIDE_ID
         echo {CLIENT_SIDE_ID}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Show output
       run: echo "${{ env.CLIENT_SIDE_ID }}"

@@ -41,7 +41,7 @@ function BookList({ allBooks }) {
             {ffBookRating && (
               <Box pt={6}>
                 <Text as="span" sx={{ fontSize: 1 }}>
-                  Stars:
+                  Rating:
                 </Text>
                 <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>
                   {[...Array(book.rating)].map((e, i) => (

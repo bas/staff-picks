@@ -81,11 +81,11 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Create .env file
+      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > .env
+      
     - name: Build project
       run: npm run build --if-present
-      
-    - name: Create .env file
-      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > out/.env
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3

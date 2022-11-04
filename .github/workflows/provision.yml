@@ -67,10 +67,34 @@ jobs:
 
   ci:
     needs: [terraform]
-    uses: ./.github/workflows/ci-job.yml
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js 14.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14.x
+      
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project
+      run: npm run build --if-present
+      
+    - name: Create .env file
+      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > out/.env
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: staff-picks
+        path: out
   
   cd:
-    needs: [terraform, ci]
+    needs: [ci]
     runs-on: ubuntu-latest
 
     steps:
@@ -82,10 +106,7 @@ jobs:
       with:
         name: staff-picks
         path: out
- 
-    - name: Create .env file
-      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > out/.env
-        
+         
     - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:

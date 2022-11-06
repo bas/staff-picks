@@ -22,7 +22,7 @@ function BookList({ allBooks }) {
           </Box>
           <Box flexGrow={1}>
             <Box>
-              <Text sx={{ fontSize: 1, fontWeight: "bold" }}>{book.title}</Text>
+              <Text sx={{ fontSize: 2, fontWeight: "bold" }}>{book.title}</Text>
             </Box>
             <Box>
               <Text sx={{ fontSize: 1 }}>By {book.author}</Text>

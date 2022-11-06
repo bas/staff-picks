@@ -1,11 +1,10 @@
 import { Box, Text, Button } from "@primer/react";
-import { StarFillIcon } from "@primer/octicons-react";
 import Image from "next/image";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 
 function BookList({ allBooks }) {
-  const { ffBookRating } = useFlags();
+  const { ffBookRating  } = useFlags();
 
   return (
     <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>

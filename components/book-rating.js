@@ -15,6 +15,7 @@ function BookRating({ stars }) {
           <StarFillIcon key={i} size={16} fill="#E5E4E2" />
         ))}
       </Text>
+      <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>({Math.floor(Math.random() * 1000)} ratings)</Text>
     </Box>
   );
 }

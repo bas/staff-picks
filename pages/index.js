@@ -82,6 +82,7 @@ function App() {
       <BaseStyles>
         <Head>
           <title>{ffPageTitle}</title>
+          <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
         <PageLayout sx={{ padding: "0px" }}>
           <PageLayout.Header>

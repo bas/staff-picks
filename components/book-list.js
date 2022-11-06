@@ -36,7 +36,7 @@ function BookList({ allBooks }) {
           </Box>
           <Box>
             <Box>
-              <Button sx={{ float: "right" }}>Add to cart</Button>
+              <Button variant={ffBuyNow ? "default" : "primary"} sx={{ float: "right" }}>Add to cart</Button>
             </Box>
             {ffBuyNow && (
               <Box pt={6}>

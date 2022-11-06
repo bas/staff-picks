@@ -4,7 +4,7 @@ import { useFlags } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 
 function BookList({ allBooks }) {
-  const { ffBookRating  } = useFlags();
+  const { ffBookRating, ffBuyNow } = useFlags();
 
   return (
     <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>
@@ -17,8 +17,8 @@ function BookList({ allBooks }) {
           borderBottomWidth={1}
           borderBottomStyle="solid"
         >
-          <Box width={64} sx={{ paddingTop: "5px"}} >
-            <Image src={book.cover} alt={book.title} height="200" width="200"/>
+          <Box width={64} sx={{ paddingTop: "5px" }}>
+            <Image src={book.cover} alt={book.title} height="200" width="200" />
           </Box>
           <Box flexGrow={1}>
             <Box>
@@ -36,10 +36,15 @@ function BookList({ allBooks }) {
           </Box>
           <Box>
             <Box>
-              <Button variant="primary" sx={{ float: "right" }}>
-                Add to Cart
-              </Button>
+              <Button variant={ffBuyNow ? "default" : "primary"} sx={{ float: "right" }}>Add to cart</Button>
             </Box>
+            {ffBuyNow && (
+              <Box pt={6}>
+                <Button variant="primary" sx={{ float: "right" }}>
+                  Buy now
+                </Button>
+              </Box>
+            )}
           </Box>
         </Box>
       ))}

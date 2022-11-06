@@ -3,16 +3,18 @@ import {
   Box,
   PageLayout,
   Header,
-  Pagehead,
+  Heading,
   Text,
   TextInput,
   Button,
 } from "@primer/react";
 import { useState } from "react";
+import Image from "next/image";
 import Head from "next/head";
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
+import logoPic from '../public/images/logo.png'
 
 function App() {
   const { ffPageTitle, ffLogin } = useFlags();
@@ -81,9 +83,12 @@ function App() {
         <Head>
           <title>{ffPageTitle}</title>
         </Head>
-        <PageLayout>
+        <PageLayout sx={{ padding: "0px" }}>
           <PageLayout.Header>
             <Header>
+              <Header.Item>
+              <Image src={logoPic} alt="logo" height="20" width="20"/>
+              </Header.Item>
               <Header.Item>
                 <Header.Link href="#">Home</Header.Link>
               </Header.Item>
@@ -113,10 +118,12 @@ function App() {
                 </Header.Item>
               )}
             </Header>
-            <Pagehead sx={{ fontSize: 3, mb: 1 }}>{ffPageTitle}</Pagehead>
+            <Heading sx={{ fontSize: 3, padding: "12px" }}>
+              {ffPageTitle}
+            </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            <Box height={500}>
+            <Box>
               <BookList allBooks={allBooks} />
             </Box>
           </PageLayout.Content>

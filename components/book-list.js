@@ -17,8 +17,8 @@ function BookList({ allBooks }) {
           borderBottomWidth={1}
           borderBottomStyle="solid"
         >
-          <Box width={64}>
-            <Image src={book.cover} alt={book.title} height={200} width={200} />
+          <Box width={64} sx={{ paddingTop: "5px"}} >
+            <Image src={book.cover} alt={book.title} height="200" width="200"/>
           </Box>
           <Box flexGrow={1}>
             <Box>
@@ -30,6 +30,9 @@ function BookList({ allBooks }) {
             <Box>
               <Text sx={{ fontSize: 1 }}>&euro;{book.price}</Text>
             </Box>
+            {/* if ffBookRating returns true show the book rating */}
+            {ffBookRating && <BookRating stars={book.rating} />}
+            {/* End of ffBookRating block */}
           </Box>
           <Box>
             <Box>
@@ -37,9 +40,6 @@ function BookList({ allBooks }) {
                 Add to Cart
               </Button>
             </Box>
-            {/* if ffBookRating returns true show the book rating */}
-            {ffBookRating && <BookRating stars={book.rating} />}
-            {/* End of ffBookRating block */}
           </Box>
         </Box>
       ))}

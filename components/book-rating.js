@@ -3,7 +3,7 @@ import { StarFillIcon } from "@primer/octicons-react";
 
 function BookRating({ stars }) {
   return (
-    <Box pt={6}>
+    <Box>
       <Text as="span" sx={{ fontSize: 1 }}>
         Rating:
       </Text>

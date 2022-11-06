@@ -6,19 +6,20 @@ permissions:
 
 on:
   workflow_dispatch:
-    inputs:
-      project:
-        required: true
-      bucket:
-        required: true
-      region: 
-        default: eu-west-1
   
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
+  BUCKET_NAME: ${{ github.event.repository.name }}
+  REGION: eu-west-1
+ 
 jobs:
   terraform:
     name: Terraform Plan & Apply
     runs-on: ubuntu-latest
     
+    outputs:
+      client_side_id: ${{ steps.tf_output.outputs.client_side_id }}
+      
     defaults:
       run:
         shell: bash
@@ -30,12 +31,14 @@ jobs:
 
     - name: Terraform Setup
       uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
 
     - name: Configure AWS credentials (OIDC)
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ inputs.region }}
+        aws-region: ${{ env.REGION }}
 
     - name: Terraform Init
       run: terraform init
@@ -50,21 +53,45 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
-        TF_VAR_project: ${{ inputs.project }} 
-        TF_VAR_bucket: ${{ inputs.bucket }}
-        TF_VAR_region: ${{ inputs.region }}
+        TF_VAR_project: ${{ env.REPO_NAME }} 
+        TF_VAR_bucket: ${{ env.BUCKET_NAME }}
+        TF_VAR_region: ${{ env.REGION }}
 
     - name: Terraform output
+      id: tf_output
       run: |
         CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
-        echo {client_side_id}}={$CLIENT_SIDE_ID} >> $GITHUB_ENV
-
-    - name: Show output
-      run: echo "${{ env.client_side_id }}"
+        echo "client_side_id=$CLIENT_SIDE_ID" >> $GITHUB_OUTPUT
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ci:
     needs: [terraform]
-    uses: ./.github/workflows/ci-job.yml
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js 14.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14.x
+      
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Create .env file
+      run: echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} > .env
+      
+    - name: Build project
+      run: npm run build --if-present
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: staff-picks
+        path: out
   
   cd:
     needs: [ci]
@@ -74,19 +101,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - uses: actions/download-artifact@v3
+    - name: Download artifact
+      uses: actions/download-artifact@v3
       with:
         name: staff-picks
         path: out
-        
+         
     - name: Configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         role-to-assume: ${{ secrets.AWS_TFSTATE_ROLE }}
-        aws-region: ${{ inputs.region }}
+        aws-region: ${{ env.REGION }}
           
     - name: Sync s3 bucket
-      run: aws s3 sync ./out s3://${{ inputs.bucket }}
+      run: aws s3 sync ./out s3://${{ env.BUCKET_NAME }}
     
     - name: Add web app url
-      run: echo "http://$REPO_NAME.s3-website-$AWS_REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY
+      run: echo "http://$REPO_NAME.s3-website-$REGION.amazonaws.com" >> $GITHUB_STEP_SUMMARY
+      env:
+        REPO_NAME: ${{ env.REPO_NAME }}
+        REGION: ${{ env.REGION }}
+        

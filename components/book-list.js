@@ -36,8 +36,13 @@ function BookList({ allBooks }) {
           </Box>
           <Box>
             <Box>
+              <Button sx={{ float: "right" }}>
+                Add to cart
+              </Button>
+            </Box>
+            <Box pt={6}>
               <Button variant="primary" sx={{ float: "right" }}>
-                Add to Cart
+                Buy now
               </Button>
             </Box>
           </Box>

@@ -128,6 +128,33 @@ resource "launchdarkly_feature_flag" "ff_book_rating" {
   ]
 }
 
+resource "launchdarkly_feature_flag" "ff_buy_now" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "ffBuyNow"
+  name        = "Buy now"
+  description = "This flag controls the visibility of the buy now button"
+
+  variation_type = "boolean"
+  variations {
+    value       = "true"
+    name        = "Show buy now button"
+    description = "Show the buy now button"
+  }
+  variations {
+    value       = "false"
+    name        = "Hide buy now button"
+    description = "Hide the buy now button"
+  }
+  
+  defaults {
+    on_variation = 0
+    off_variation = 1
+  }
+
+  tags = [
+    "terraform-managed",   
+  ]
+}
 resource "aws_s3_bucket" "staff_picks_data_storage" {
   bucket = var.bucket
   acl    = "public-read"

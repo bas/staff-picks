@@ -1,5 +1,5 @@
 import { Box, Text, Button } from "@primer/react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 

@@ -9,7 +9,7 @@ import {
   Button,
 } from "@primer/react";
 import { useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Head from "next/head";
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";

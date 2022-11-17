@@ -34,7 +34,7 @@ jobs:
         path: out
         
     - name: Configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v1-node16
+      uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
         role-to-assume: ${{ secrets.AWS_DEPLOY_PROD_ROLE }}
         aws-region: ${{ env.AWS_REGION }}

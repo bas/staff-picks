@@ -88,7 +88,15 @@ function App() {
           <PageLayout.Header>
             <Header>
               <Header.Item>
-              <Image src={logoPic} alt="logo" height="20" width="20"/>
+              <Image
+                src={logoPic}
+                alt="logo"
+                height="20"
+                width="20"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               </Header.Item>
               <Header.Item>
                 <Header.Link href="#">Home</Header.Link>

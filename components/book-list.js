@@ -18,7 +18,15 @@ function BookList({ allBooks }) {
           borderBottomStyle="solid"
         >
           <Box width={64} sx={{ paddingTop: "5px" }}>
-            <Image src={book.cover} alt={book.title} height="200" width="200" />
+            <Image
+              src={book.cover}
+              alt={book.title}
+              height="200"
+              width="200"
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Box>
           <Box flexGrow={1}>
             <Box>

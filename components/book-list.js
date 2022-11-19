@@ -22,11 +22,7 @@ function BookList({ allBooks }) {
               src={book.cover}
               alt={book.title}
               height="200"
-              width="200"
-              style={{
-                maxWidth: "100%",
-                height: "auto"
-              }} />
+              width="200" />
           </Box>
           <Box flexGrow={1}>
             <Box>

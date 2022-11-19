@@ -25,7 +25,7 @@ function App() {
     {
       title: "Scrum: The Art of Doing Twice the Work in Half the Time",
       author: "Jeff Sutherland",
-      cover: "/bas-staff-picks-demo/images/scrum.jpg",
+      cover: "/images/scrum.jpg",
       price: "15.00",
       rating: 5,
     },
@@ -33,7 +33,7 @@ function App() {
       title:
         "The Lean Startup: How Constant Innovation Creates Radically Successful Businesses",
       author: "Eric Ries",
-      cover: "/bas-staff-picks-demo/images/lean.jpg",
+      cover: "/images/lean.jpg",
       price: "12.99",
       rating: 4,
     },
@@ -41,14 +41,14 @@ function App() {
       title:
         "Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations",
       author: "Nicole Forsgren and Jez Humble",
-      cover: "/bas-staff-picks-demo/images/accelerate.jpg",
+      cover: "/images/accelerate.jpg",
       price: "17.99",
       rating: 5,
     },
     {
       title: "The Mythical Man-Month: Essays on Software Engineering",
       author: "Frederick P. Brooks Jr.",
-      cover: "/bas-staff-picks-demo/images/month.jpg",
+      cover: "/images/month.jpg",
       price: "16.90",
       rating: 3,
     },
@@ -56,7 +56,7 @@ function App() {
       title:
         "Don't Make Me Think, Revisited: A Common Sense Approach to Web Usability",
       author: "Steve Krug",
-      cover: "/bas-staff-picks-demo/images/think.jpg",
+      cover: "/images/think.jpg",
       price: "10.99",
       rating: 4,
     },

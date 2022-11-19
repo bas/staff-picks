@@ -1,5 +1,12 @@
+const repo = 'bas-staff-picks-demo'
+const assetPrefix = `/${repo}/`
+const basePath = `/${repo}`
+
+
 module.exports = {
   output: 'standalone',
+  assetPrefix: assetPrefix,
+  basePath: basePath,
   images: {
     unoptimized: true
   },

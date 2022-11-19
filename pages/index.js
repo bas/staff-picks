@@ -92,11 +92,7 @@ function App() {
                 src={logoPic}
                 alt="logo"
                 height="20"
-                width="20"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto"
-                }} />
+                width="20" />
               </Header.Item>
               <Header.Item>
                 <Header.Link href="#">Home</Header.Link>

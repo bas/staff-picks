@@ -17,7 +17,7 @@ function BookList({ allBooks }) {
           borderBottomWidth={1}
           borderBottomStyle="solid"
         >
-          <Box width={70} sx={{ padding: "8px" }}>
+          <Box width={80} sx={{ padding: "8px" }}>
             <Image
               src={book.cover}
               alt={book.title}

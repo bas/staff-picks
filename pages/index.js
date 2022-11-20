@@ -39,7 +39,7 @@ function App() {
     },
     {
       title:
-        "Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations",
+        "Accelerate: The Science of Lean Software and DevOps",
       author: "Nicole Forsgren and Jez Humble",
       cover: "/images/accelerate.jpg",
       price: "17.99",

@@ -81,7 +81,7 @@ function App() {
     <div className="App">
       <BaseStyles>
         <Head>
-          <title>{ffPageTitle}</title>
+          <title>{ffPageTitle ? ffPageTitle : "Staff Picks"}</title>
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
         <PageLayout sx={{ padding: "0px" }}>

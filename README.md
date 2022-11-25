@@ -16,5 +16,5 @@ Go to http://localhost:3000/ in your browser to visit the web app. You should se
 For LaunchDarkly to work you need to add a `.env` file with the following:
 
 ```
-LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=<Your Client ID>
+LAUNCHDARKLY_CLIENT_ID=<Your Client ID>
 ```

@@ -17,12 +17,21 @@ function BookList({ allBooks }) {
           borderBottomWidth={1}
           borderBottomStyle="solid"
         >
-          <Box width={80} sx={{ padding: "8px", display: "flex", justifyContent: "center" }} >
+          <Box
+            width={80}
+            sx={{
+              padding: "10px",
+              paddingTop: "5px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Image
-              src={book.cover}
+              src={`${process.env.assetPrefix}${book.cover}`}
               alt={book.title}
-              height={105}
-              width={70} />
+              height={90}
+              width={60}
+            />
           </Box>
           <Box flexGrow={1}>
             <Box>
@@ -40,7 +49,12 @@ function BookList({ allBooks }) {
           </Box>
           <Box>
             <Box>
-              <Button variant={ffBuyNow ? "default" : "primary"} sx={{ float: "right" }}>Add to cart</Button>
+              <Button
+                variant={ffBuyNow ? "default" : "primary"}
+                sx={{ float: "right" }}
+              >
+                Add to cart
+              </Button>
             </Box>
             {ffBuyNow && (
               <Box pt={6}>

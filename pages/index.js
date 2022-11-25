@@ -31,7 +31,7 @@ function App() {
     },
     {
       title:
-        "The Lean Startup: How Constant Innovation Creates Radically Successful Businesses",
+        "The Lean Startup",
       author: "Eric Ries",
       cover: "/images/lean.jpg",
       price: "12.99",

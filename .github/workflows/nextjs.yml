@@ -38,7 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Create .env file
-        run: echo REPO_NAME=/${{ github.event.repository.name }} > .env
+        run: |
+          echo REPO_NAME=/${{ github.event.repository.name }} > .env
+          echo LAUNCHDARKLY_CLIENT_ID=6364d94389ffbf10b980dcc9 >> .env
       - name: Build with Next.js
         run: npm run build --if-present
       - name: Upload artifact

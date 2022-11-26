@@ -123,7 +123,7 @@ function App() {
                 </Header.Item>
               )}
             </Header>
-            <Heading sx={{ fontSize: 3, padding: "12px", paddingBottom: "0px" }}>
+            <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
               {ffPageTitle}
             </Heading>
           </PageLayout.Header>

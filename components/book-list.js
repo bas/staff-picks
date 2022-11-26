@@ -20,8 +20,7 @@ function BookList({ allBooks }) {
           <Box
             width={80}
             sx={{
-              padding: "10px",
-              paddingTop: "5px",
+              padding: "5px 10px 10px 10px",
               display: "flex",
               justifyContent: "center",
             }}

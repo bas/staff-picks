@@ -14,9 +14,9 @@ import Head from "next/head";
 import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
-import logoPic from '../public/images/logo.png'
+import logoPic from "../public/images/logo.png";
 
-function App() {
+export default function App() {
   const { ffPageTitle, ffLogin } = useFlags();
   const [email, setEmail] = useState("");
   const ldClient = useLDClient();
@@ -30,16 +30,14 @@ function App() {
       rating: 5,
     },
     {
-      title:
-        "The Lean Startup",
+      title: "The Lean Startup",
       author: "Eric Ries",
       cover: "/images/lean.jpg",
       price: "12.99",
       rating: 4,
     },
     {
-      title:
-        "Accelerate: The Science of Lean Software and DevOps",
+      title: "Accelerate: The Science of Lean Software and DevOps",
       author: "Nicole Forsgren and Jez Humble",
       cover: "/images/accelerate.jpg",
       price: "17.99",
@@ -88,11 +86,7 @@ function App() {
           <PageLayout.Header>
             <Header>
               <Header.Item>
-              <Image
-                src={logoPic}
-                alt="logo"
-                height="20"
-                width="20" />
+                <Image src={logoPic} alt="logo" height="20" width="20" />
               </Header.Item>
               <Header.Item>
                 <Header.Link href="#">Home</Header.Link>
@@ -124,7 +118,7 @@ function App() {
               )}
             </Header>
             <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
-              {ffPageTitle}
+              {ffPageTitle ? ffPageTitle : "Staff Picks"}
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
@@ -145,5 +139,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

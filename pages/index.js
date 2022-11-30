@@ -15,9 +15,10 @@ import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import logoPic from "../public/images/logo.png";
+import Banner from "../components/banner";
 
 export default function App() {
-  const { ffPageTitle, ffLogin } = useFlags();
+  const { ffPageTitle, ffLogin, ffBanner } = useFlags();
   const [email, setEmail] = useState("");
   const ldClient = useLDClient();
 
@@ -122,6 +123,7 @@ export default function App() {
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
+            {ffBanner && <Banner couponCode="WELCOME" discount={10} />}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

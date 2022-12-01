@@ -1,20 +1,21 @@
 import {
-  Box,
   Header,
-  TextInput,
-  Button,
 } from "@primer/react";
+import { useFlags } from "launchdarkly-react-client-sdk";
 import Image from "next/image";
 import logoPic from "../public/images/logo.png";
+import LoginForm from "./login-form";
 
-function PageHeader() {
+function NavigationBar() {
+  const { ffLogin } = useFlags();
+
   return (
     <Header>
       <Header.Item>
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Header.Link href="#">Home</Header.Link>
+        <Header.Link href="/">Home</Header.Link>
       </Header.Item>
       <Header.Item>
         <Header.Link href="#">Staff picks</Header.Link>
@@ -24,25 +25,11 @@ function PageHeader() {
       </Header.Item>
       {ffLogin && (
         <Header.Item>
-          <Box display="flex">
-            <Box flexGrow={1}>
-              <TextInput
-                aria-label="Email"
-                name="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Box>
-            <Box>
-              <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
-                Sign in
-              </Button>
-            </Box>
-          </Box>
+          <LoginForm />
         </Header.Item>
       )}
     </Header>
   );
 }
 
-export default PageHeader;
+export default NavigationBar;

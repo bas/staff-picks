@@ -155,6 +155,35 @@ resource "launchdarkly_feature_flag" "ff_buy_now" {
     "terraform-managed",   
   ]
 }
+
+resource "launchdarkly_feature_flag" "ff_banner" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "ffBanner"
+  name        = "Banner"
+  description = "This flag controls the visibility of the discount banner"
+
+  variation_type = "boolean"
+  variations {
+    value       = "true"
+    name        = "Show banner"
+    description = "Show the discount banner"
+  }
+  variations {
+    value       = "false"
+    name        = "Hide baner"
+    description = "Hide the discount banner"
+  }
+  
+  defaults {
+    on_variation = 0
+    off_variation = 1
+  }
+
+  tags = [
+    "terraform-managed",   
+  ]
+}
+
 resource "aws_s3_bucket" "staff_picks_data_storage" {
   bucket = var.bucket
   acl    = "public-read"

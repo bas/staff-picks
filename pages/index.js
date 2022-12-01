@@ -4,18 +4,17 @@ import {
   PageLayout,
   Header,
   Heading,
-  Text,
   TextInput,
   Button,
 } from "@primer/react";
 import { useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
-import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import logoPic from "../public/images/logo.png";
 import Banner from "../components/banner";
+import Footer from "../components/footer";
 
 export default function App() {
   const { ffPageTitle, ffLogin, ffBanner } = useFlags();
@@ -96,7 +95,7 @@ export default function App() {
                 <Header.Link href="#">Staff picks</Header.Link>
               </Header.Item>
               <Header.Item full>
-                <Header.Link href="#">About</Header.Link>
+                <Header.Link href="/about">About</Header.Link>
               </Header.Item>
               {ffLogin && (
                 <Header.Item>
@@ -129,12 +128,7 @@ export default function App() {
             </Box>
           </PageLayout.Content>
           <PageLayout.Footer>
-            <Box>
-              <Text sx={{ fontSize: 1, textAlign: "center" }} as="p">
-                Made with <HeartFillIcon size={16} fill="red" /> by avid
-                readers.
-              </Text>
-            </Box>
+            <Footer />
           </PageLayout.Footer>
         </PageLayout>
       </BaseStyles>

@@ -16,6 +16,6 @@ export default withLDProvider({
     bootstrap: "localStorage",
   },
   reactOptions: {
-    useCamelCaseFlagKeys: false,
+    useCamelCaseFlagKeys: true,
   },
 })(App);

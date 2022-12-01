@@ -1,9 +1,13 @@
 name: Find LaunchDarkly flag code references
 
 on: push
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
 
 jobs:
   launchDarklyCodeReferences:
@@ -17,4 +21,4 @@ jobs:
         uses: launchdarkly/find-code-references@v2.8.0
         with:
           accessToken: ${{ secrets.LD_ACCESS_TOKEN }}
-          projKey: "bas-staff-picks-demo"
+          projKey: ${{ env.REPO_NAME }} 

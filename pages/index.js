@@ -18,7 +18,7 @@ import logoPic from "../public/images/logo.png";
 import Banner from "../components/banner";
 
 export default function App() {
-  const { ffPageTitle, ffLogin, ffBanner } = useFlags();
+  const { showLogin, showBanner } = useFlags();
   const [email, setEmail] = useState("");
   const ldClient = useLDClient();
 
@@ -80,7 +80,7 @@ export default function App() {
     <div className="App">
       <BaseStyles>
         <Head>
-          <title>{ffPageTitle ? ffPageTitle : "Staff Picks"}</title>
+          <title>Staff picks</title>
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
         <PageLayout sx={{ padding: "0px" }}>
@@ -98,7 +98,7 @@ export default function App() {
               <Header.Item full>
                 <Header.Link href="#">About</Header.Link>
               </Header.Item>
-              {ffLogin && (
+              {showLogin && (
                 <Header.Item>
                   <Box display="flex">
                     <Box flexGrow={1}>
@@ -119,11 +119,11 @@ export default function App() {
               )}
             </Header>
             <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
-              {ffPageTitle ? ffPageTitle : "Staff Picks"}
+              Staff picks
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            {ffBanner && <Banner couponCode="WELCOME" discount={10} />}
+            {showBanner && <Banner couponCode="WELCOME" discount={10} />}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

@@ -2,25 +2,17 @@ import {
   BaseStyles,
   Box,
   PageLayout,
-  Header,
   Heading,
-  Text,
-  TextInput,
-  Button,
 } from "@primer/react";
-import { useState } from "react";
-import Image from "next/image";
 import Head from "next/head";
-import { HeartFillIcon } from "@primer/octicons-react";
 import BookList from "../components/book-list";
-import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
-import logoPic from "../public/images/logo.png";
+import { useFlags } from "launchdarkly-react-client-sdk";
 import Banner from "../components/banner";
+import Footer from "../components/footer";
+import NavigationBar from "../components/navigation-bar"
 
 export default function App() {
-  const { showLogin, showBanner } = useFlags();
-  const [email, setEmail] = useState("");
-  const ldClient = useLDClient();
+  const { ffPageTitle, ffBanner } = useFlags();
 
   const allBooks = [
     {
@@ -61,21 +53,6 @@ export default function App() {
     },
   ];
 
-  async function onSubmit() {
-    console.log("sign in with email: ", email);
-    if (ldClient) {
-      const identity = {
-        key: email,
-      };
-      ldClient.identify(identity, null, () => {
-        console.log("New user's flags available");
-
-        const userFlags = ldClient.allFlags();
-        console.log(userFlags);
-      });
-    }
-  }
-
   return (
     <div className="App">
       <BaseStyles>
@@ -85,39 +62,7 @@ export default function App() {
         </Head>
         <PageLayout sx={{ padding: "0px" }}>
           <PageLayout.Header>
-            <Header>
-              <Header.Item>
-                <Image src={logoPic} alt="logo" height="20" width="20" />
-              </Header.Item>
-              <Header.Item>
-                <Header.Link href="#">Home</Header.Link>
-              </Header.Item>
-              <Header.Item>
-                <Header.Link href="#">Staff picks</Header.Link>
-              </Header.Item>
-              <Header.Item full>
-                <Header.Link href="#">About</Header.Link>
-              </Header.Item>
-              {showLogin && (
-                <Header.Item>
-                  <Box display="flex">
-                    <Box flexGrow={1}>
-                      <TextInput
-                        aria-label="Email"
-                        name="email"
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </Box>
-                    <Box>
-                      <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
-                        Sign in
-                      </Button>
-                    </Box>
-                  </Box>
-                </Header.Item>
-              )}
-            </Header>
+            <NavigationBar />
             <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
               Staff picks
             </Heading>
@@ -129,12 +74,7 @@ export default function App() {
             </Box>
           </PageLayout.Content>
           <PageLayout.Footer>
-            <Box>
-              <Text sx={{ fontSize: 1, textAlign: "center" }} as="p">
-                Made with <HeartFillIcon size={16} fill="red" /> by avid
-                readers.
-              </Text>
-            </Box>
+            <Footer />
           </PageLayout.Footer>
         </PageLayout>
       </BaseStyles>

@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "staff-picks-tfstate"
+    bucket = "bas-staff-picks-tfstate"
     key    = "staff-picks.tfstate"
     region = "eu-west-1"
   }

@@ -1,5 +1,5 @@
 
-name: Deprovision Environment
+name: Deprovision LaunchDarkly
 
 permissions:
   id-token: write

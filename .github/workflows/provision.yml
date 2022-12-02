@@ -1,4 +1,4 @@
-name: Provision and deploy
+name: Provision LaunchDarkly
 
 on:
   workflow_dispatch:
@@ -6,11 +6,6 @@ on:
 permissions:
   id-token: write 
   contents: read
-  pages: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 env:
   REPO_NAME: ${{ github.event.repository.name }}
@@ -67,61 +62,3 @@ jobs:
         echo "client_side_id=$CLIENT_SIDE_ID" >> $GITHUB_OUTPUT
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: terraform    
-    steps:
-    
-      - name: Checkout
-        uses: actions/checkout@v3
-    
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-    
-      - name: Setup pages
-        uses: actions/configure-pages@v2
-        with:
-          static_site_generator: next
-    
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
-    
-      - name: Install dependencies
-        run: npm ci
-    
-      - name: Create .env file
-        run: |
-          echo REPO_NAME=/${{ github.event.repository.name }} > .env
-          echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} >> .env
-    
-      - name: Build with Next.js
-        run: npm run build --if-present
-    
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./out
-
-  deploy:
-    name: Deploy
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1

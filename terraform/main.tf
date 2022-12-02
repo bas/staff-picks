@@ -20,32 +20,34 @@ resource "launchdarkly_project" "terraform" {
   key  = var.project
   name = var.project
 
+  environments {
+    key   = "production"
+    name  = "Production"
+    color = "BE3455"
+    tags  = ["terraform"]
+    approval_settings {
+      can_review_own_request = false
+      can_apply_declined_changes = false
+      min_num_approvals      = 1
+      required_approval_tags = ["approvals-required"]
+    }
+  }
+
+  environments {
+    key   = "development"
+    name  = "Development"
+    color = "2DA44E"
+    tags  = ["terraform"]
+  }
+  
   tags = [
-    "terraform-managed", "bpeters"
+    "terraform", "bpeters"
   ]
 
   default_client_side_availability {
     using_environment_id = true
     using_mobile_key     = false
   }
-}
-
-resource "launchdarkly_environment" "development" {
-  name  = "Development"
-  key   = "development"
-  color = "7B42BC"
-  tags  = ["terraform-managed", "development"]
-
-  project_key = launchdarkly_project.terraform.key
-}
-
-resource "launchdarkly_environment" "production" {
-  name  = "Production"
-  key   = "production"
-  color = "ff00ff"
-  tags  = ["terraform-managed", "production"]
-
-  project_key = launchdarkly_project.terraform.key
 }
 
 resource "launchdarkly_feature_flag" "show_login" {
@@ -72,7 +74,7 @@ resource "launchdarkly_feature_flag" "show_login" {
   }
 
   tags = [
-    "terraform-managed",   
+    "terraform",   
   ]
 }
 
@@ -100,7 +102,7 @@ resource "launchdarkly_feature_flag" "show_book_rating" {
   }
 
   tags = [
-    "terraform-managed",   
+    "terraform",   
   ]
 }
 
@@ -128,7 +130,7 @@ resource "launchdarkly_feature_flag" "show_buy_now_button" {
   }
 
   tags = [
-    "terraform-managed",   
+    "terraform",   
   ]
 }
 
@@ -156,6 +158,6 @@ resource "launchdarkly_feature_flag" "show_banner" {
   }
 
   tags = [
-    "terraform-managed",   
+    "terraform",   
   ]
 }

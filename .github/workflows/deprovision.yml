@@ -14,8 +14,8 @@ env:
   REGION: eu-west-1
 
 jobs:
-  Terraform:
-    name: Terraform Destroy
+  terraform:
+    name: Terraform destroy
     runs-on: ubuntu-latest
     
     defaults:

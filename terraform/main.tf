@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "bas-staff-picks-tfstate"
-    key    = "bas-staff-picks.tfstate"
+    bucket = "staff-picks-tfstate"
+    key    = "staff-picks.tfstate"
     region = "eu-west-1"
   }
 }
@@ -21,7 +21,7 @@ resource "launchdarkly_project" "terraform" {
   name = var.project
 
   tags = [
-    "terraform-managed",
+    "terraform-managed", "bpeters"
   ]
 
   default_client_side_availability {

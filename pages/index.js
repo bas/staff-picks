@@ -12,7 +12,7 @@ import Footer from "../components/footer";
 import NavigationBar from "../components/navigation-bar"
 
 export default function App() {
-  const { ffPageTitle, ffBanner } = useFlags();
+  const { showBanner } = useFlags();
 
   const allBooks = [
     {

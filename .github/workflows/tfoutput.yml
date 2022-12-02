@@ -64,7 +64,6 @@ jobs:
     
       - name: Create .env file
         run: |
-          scho ${{ needs.terraform.outputs.client_side_id }}
           echo REPO_NAME=/${{ github.event.repository.name }} > .env
           echo LAUNCHDARKLY_SDK_CLIENT_SIDE_ID=${{ needs.terraform.outputs.client_side_id }} >> .env
           cat .env

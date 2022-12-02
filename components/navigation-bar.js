@@ -7,7 +7,7 @@ import logoPic from "../public/images/logo.png";
 import LoginForm from "./login-form";
 
 function NavigationBar() {
-  const { ffLogin } = useFlags();
+  const { showLogin } = useFlags();
 
   return (
     <Header>
@@ -23,7 +23,7 @@ function NavigationBar() {
       <Header.Item full>
         <Header.Link href="/about">About</Header.Link>
       </Header.Item>
-      {ffLogin && (
+      {showLogin && (
         <Header.Item>
           <LoginForm />
         </Header.Item>

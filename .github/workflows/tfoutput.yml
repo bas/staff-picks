@@ -7,9 +7,6 @@ permissions:
   id-token: write 
   contents: read
 
-concurrency:
-  cancel-in-progress: true
-
 env:
   REPO_NAME: ${{ github.event.repository.name }}
   OWNER: ${{ github.repository_owner }}

@@ -21,6 +21,13 @@ resource "launchdarkly_project" "terraform" {
   name = var.project
 
   environments {
+    key   = "development"
+    name  = "Development"
+    color = "2DA44E"
+    tags  = ["terraform"]
+  }
+  
+  environments {
     key   = "production"
     name  = "Production"
     color = "BE3455"
@@ -31,13 +38,6 @@ resource "launchdarkly_project" "terraform" {
       min_num_approvals      = 1
       required_approval_tags = ["approvals-required"]
     }
-  }
-
-  environments {
-    key   = "development"
-    name  = "Development"
-    color = "2DA44E"
-    tags  = ["terraform"]
   }
   
   tags = [

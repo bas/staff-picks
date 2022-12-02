@@ -12,6 +12,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  REGION: eu-west-1
+
 jobs:
   terraform:
     name: Terraform output

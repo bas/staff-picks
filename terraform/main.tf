@@ -4,10 +4,6 @@ terraform {
       source  = "launchdarkly/launchdarkly"
       version = "~> 2.0"
     }
-    aws = {
-      source = "hashicorp/aws"
-      version = "~> 4.37.0"
-    }
   }
   backend "s3" {
     bucket = "bas-staff-picks-tfstate"
@@ -20,63 +16,43 @@ provider "launchdarkly" {
   access_token = var.LAUNCHDARKLY_ACCESS_TOKEN
 }
 
-provider "aws" {
-  region = var.region
-}
-
 resource "launchdarkly_project" "terraform" {
   key  = var.project
   name = var.project
 
   tags = [
-    "terraform",
+    "terraform-managed",
   ]
 
-  environments {
-        key   = "dev"
-        name  = "Development"
-        color = "7B42BC"
-        tags  = ["terraform"]
-  }
   default_client_side_availability {
     using_environment_id = true
     using_mobile_key     = false
   }
 }
 
-resource "launchdarkly_feature_flag" "ff_page_title" {
+resource "launchdarkly_environment" "development" {
+  name  = "Development"
+  key   = "development"
+  color = "7B42BC"
+  tags  = ["terraform-managed", "development"]
+
   project_key = launchdarkly_project.terraform.key
-  key         = "ffPageTitle"
-  name        = "Page Title"
-  description = "This flag controls the title on the staff picks page"
-
-  variation_type = "string"
-  variations {
-    value       = "Staff picks"
-    name        = "Staff picks on"
-    description = "Show the Staff picks title"
-  }
-  variations {
-    value       = "Staff recommendations"
-    name        = "Staff recommendations on"
-    description = "Show the Staff recommendations title"
-  }
-  
-  defaults {
-    on_variation = 0
-    off_variation = 1
-  }
-
-  tags = [
-    "terraform-managed"
-  ]
 }
 
-resource "launchdarkly_feature_flag" "ff_login" {
+resource "launchdarkly_environment" "production" {
+  name  = "Production"
+  key   = "production"
+  color = "ff00ff"
+  tags  = ["terraform-managed", "production"]
+
   project_key = launchdarkly_project.terraform.key
-  key         = "ffLogin"
-  name        = "Login Form"
-  description = "This flag controls the Login form in the page header"
+}
+
+resource "launchdarkly_feature_flag" "show_login" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "show-login"
+  name        = "Show login Form"
+  description = "This flag controls the login form in the page header"
 
   variation_type = "boolean"
   variations {
@@ -100,22 +76,22 @@ resource "launchdarkly_feature_flag" "ff_login" {
   ]
 }
 
-resource "launchdarkly_feature_flag" "ff_book_rating" {
+resource "launchdarkly_feature_flag" "show_book_rating" {
   project_key = launchdarkly_project.terraform.key
-  key         = "ffBookRating"
-  name        = "Book rating"
+  key         = "show-book-rating"
+  name        = "Show book rating"
   description = "This flag controls the visibility of the book ratings"
 
   variation_type = "boolean"
   variations {
     value       = "true"
-    name        = "Show book ratings"
-    description = "Show the book ratings"
+    name        = "Show book rating"
+    description = "Show the book rating"
   }
   variations {
     value       = "false"
-    name        = "Disable book ratings"
-    description = "Hide the book ratings"
+    name        = "Hide book rating"
+    description = "Hide the book rating"
   }
   
   defaults {
@@ -128,22 +104,22 @@ resource "launchdarkly_feature_flag" "ff_book_rating" {
   ]
 }
 
-resource "launchdarkly_feature_flag" "ff_buy_now" {
+resource "launchdarkly_feature_flag" "show_buy_now_button" {
   project_key = launchdarkly_project.terraform.key
-  key         = "ffBuyNow"
-  name        = "Buy now"
-  description = "This flag controls the visibility of the buy now button"
+  key         = "show-buy-now-button"
+  name        = "Show buy now button"
+  description = "This flag controls the visibility of the buy now button for a book"
 
   variation_type = "boolean"
   variations {
     value       = "true"
     name        = "Show buy now button"
-    description = "Show the buy now button"
+    description = "Show the buy now button for a book"
   }
   variations {
     value       = "false"
     name        = "Hide buy now button"
-    description = "Hide the buy now button"
+    description = "Hide the buy now button for a book"
   }
   
   defaults {
@@ -156,22 +132,22 @@ resource "launchdarkly_feature_flag" "ff_buy_now" {
   ]
 }
 
-resource "launchdarkly_feature_flag" "ff_banner" {
+resource "launchdarkly_feature_flag" "show_banner" {
   project_key = launchdarkly_project.terraform.key
-  key         = "ffBanner"
-  name        = "Banner"
-  description = "This flag controls the visibility of the discount banner"
+  key         = "show-banner"
+  name        = "Show Banner"
+  description = "This flag controls the visibility of the campaign banner"
 
   variation_type = "boolean"
   variations {
     value       = "true"
     name        = "Show banner"
-    description = "Show the discount banner"
+    description = "Show the campaign banner"
   }
   variations {
     value       = "false"
     name        = "Hide baner"
-    description = "Hide the discount banner"
+    description = "Hide the campaign banner"
   }
   
   defaults {
@@ -183,41 +159,3 @@ resource "launchdarkly_feature_flag" "ff_banner" {
     "terraform-managed",   
   ]
 }
-
-resource "aws_s3_bucket" "staff_picks_data_storage" {
-  bucket = var.bucket
-  acl    = "public-read"
-  force_destroy = true
-
-  policy = <<POLICY
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "PublicRead",
-          "Effect": "Allow",
-          "Principal": "*",
-          "Action": [
-              "s3:GetObject",
-              "s3:GetObjectVersion"
-          ],
-          "Resource": "arn:aws:s3:::${var.bucket}/*"
-        }
-      ]
-    }
-  POLICY
-
-}
-
-resource "aws_s3_bucket_website_configuration" "staff_picks_pages" {
-  bucket = var.bucket
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "error.html"
-  }
-}
-

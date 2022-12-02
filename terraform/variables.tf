@@ -3,13 +3,5 @@ variable "LAUNCHDARKLY_ACCESS_TOKEN" {
 }
 
 variable "project" {
-  default = "bas-staff-picks-demo"
-}
-
-variable "bucket" {
-  default = "bas-staff-picks-demo"
-}
-
-variable "region" {
-  default = "eu-west-1"
+  default = "bas-staff-picks"
 }

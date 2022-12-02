@@ -12,7 +12,7 @@ import Footer from "../components/footer";
 import NavigationBar from "../components/navigation-bar"
 
 export default function App() {
-  const { ffPageTitle, ffBanner } = useFlags();
+  const { showBanner } = useFlags();
 
   const allBooks = [
     {
@@ -57,18 +57,18 @@ export default function App() {
     <div className="App">
       <BaseStyles>
         <Head>
-          <title>{ffPageTitle ? ffPageTitle : "Staff Picks"}</title>
+          <title>Staff picks</title>
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
         <PageLayout sx={{ padding: "0px" }}>
           <PageLayout.Header>
             <NavigationBar />
             <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
-              {ffPageTitle ? ffPageTitle : "Staff Picks"}
+              Staff picks
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            {ffBanner && <Banner couponCode="WELCOME" discount={10} />}
+            {showBanner && <Banner couponCode="WELCOME" discount={10} />}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

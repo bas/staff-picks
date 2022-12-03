@@ -27,7 +27,7 @@ export default function App() {
       author: "Jeff Sutherland",
       cover: "/images/scrum.jpg",
       price: "15.00",
-      rating: 5,
+      rating: 3,
     },
     {
       title: "The Lean Startup",
@@ -49,7 +49,7 @@ export default function App() {
       author: "Steve Krug",
       cover: "/images/think.jpg",
       price: "10.99",
-      rating: 3,
+      rating: 4,
     },
   ];
 

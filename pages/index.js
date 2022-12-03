@@ -49,7 +49,7 @@ export default function App() {
       author: "Steve Krug",
       cover: "/images/think.jpg",
       price: "10.99",
-      rating: 4,
+      rating: 3,
     },
   ];
 

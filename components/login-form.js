@@ -1,4 +1,4 @@
-import { Box, TextInput, Button, Popover, Heading, Text } from "@primer/react";
+import { Box, TextInput, Button, Popover, Text } from "@primer/react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState } from "react";
 

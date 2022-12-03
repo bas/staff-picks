@@ -38,7 +38,7 @@ export default function App() {
     },
     {
       title: "The DevOps Handbook",
-      author: "Gene Kim Jez Humble",
+      author: "Gene Kim and Jez Humble",
       cover: "/images/devops.jpg",
       price: "29.10",
       rating: 5,

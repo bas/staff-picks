@@ -10,60 +10,75 @@ function LoginForm() {
   const allProfiles = [
     {
       key: "alpha@example.com",
+      email: "alpha@example.com",
+      name: "Alpha",
+      country: "United States",
       custom: {
         region: "America",
-        country: "United States",
         premium: false,
       },
     },
     {
       key: "bravo@example.com",
+      email: "bravo@example.com",
+      name: "Bravo",
+      country: "Norway",
       custom: {
         region: "Europe",
-        country: "Norway",
         premium: true,
       },
     },
     {
       key: "charlie@example.com",
+      email: "charlie@example.com",
+      name: "Charlie",
+      country: "United Kingdom",
       custom: {
         region: "Europe",
-        country: "United Kingdom",
         premium: false,
       },
     },
     {
       key: "delta@example.com",
+      email: "delta@example.com",
+      name: "Delta",
+      country: "Singapore",
       custom: {
         region: "Asia",
-        country: "Singapore",
         premium: true,
       },
     },
     {
       key: "echo@example.com",
+      email: "echo@example.com",
+      name: "Echo",
+      country: "United States",
       custom: {
         region: "America",
-        country: "United States",
         premium: true,
       },
     },
     {
       key: "foxtrot@example.com",
+      email: "foxtrot@example.com",
+      name: "Foxtrot",
+      country: "Australia",
       custom: {
         region: "Australia",
-        country: "Australia",
         premium: false,
       },
     },
   ];
 
   async function onSubmit() {
-    const num = Math.floor(Math.random() * allProfiles.length)
-    setIdentity(allProfiles[num]);
+    const num = Math.floor(Math.random() * allProfiles.length);
+
+    const newUser = allProfiles[num];
+
+    setIdentity(newUser);
 
     if (ldClient) {
-      ldClient.identify(identity, null, () => {
+      ldClient.identify(newUser, null, () => {
         console.log("New user's flags available");
 
         const userFlags = ldClient.allFlags();
@@ -81,6 +96,7 @@ function LoginForm() {
           aria-label="Email"
           name="email"
           placeholder="Email"
+          readOnly={true}
           value={identity ? identity.key : ""}
         />
       </Box>
@@ -100,7 +116,7 @@ function LoginForm() {
                     Region: {identity.custom.region}
                   </Text>
                   <Text as="p" color="black">
-                    Country: {identity.custom.country}
+                    Country: {identity.country}
                   </Text>
                   <Text as="p" color="black">
                     Premium: {identity.custom.premium ? "Yes" : "No"}

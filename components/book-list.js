@@ -14,13 +14,13 @@ function BookList({ allBooks }) {
           key={book.title}
           p={2}
           borderColor="border.default"
-          borderBottomWidth={1}
-          borderBottomStyle="solid"
+          borderTopWidth={1}
+          borderTopStyle="solid"
         >
           <Box
-            width={80}
+            width={70}
             sx={{
-              padding: "5px 10px 10px 10px",
+              padding: "5px 5px 0px 0px",
               display: "flex",
               justifyContent: "center",
             }}

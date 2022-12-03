@@ -16,6 +16,13 @@ export default function App() {
 
   const allBooks = [
     {
+      title: "Accelerate: The Science of Lean Software and DevOps",
+      author: "Nicole Forsgren and Jez Humble",
+      cover: "/images/accelerate.jpg",
+      price: "17.99",
+      rating: 5,
+    },
+    {
       title: "Scrum: The Art of Doing Twice the Work in Half the Time",
       author: "Jeff Sutherland",
       cover: "/images/scrum.jpg",
@@ -30,18 +37,11 @@ export default function App() {
       rating: 4,
     },
     {
-      title: "Accelerate: The Science of Lean Software and DevOps",
-      author: "Nicole Forsgren and Jez Humble",
-      cover: "/images/accelerate.jpg",
-      price: "17.99",
+      title: "The DevOps Handbook",
+      author: "Gene Kim Jez Humble",
+      cover: "/images/devops.jpg",
+      price: "29.10",
       rating: 5,
-    },
-    {
-      title: "The Mythical Man-Month: Essays on Software Engineering",
-      author: "Frederick P. Brooks Jr.",
-      cover: "/images/month.jpg",
-      price: "16.90",
-      rating: 3,
     },
     {
       title:

@@ -68,7 +68,7 @@ export default function App() {
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            {showBanner && <Banner couponCode="WELCOME" discount={10} />}
+            {showBanner && <Banner bannerText="Apply code HIGHFIVE and get 10% discount on checkout!" />}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

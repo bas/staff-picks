@@ -60,7 +60,7 @@ export default function App() {
           <title>Staff picks</title>
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
-        <PageLayout sx={{ padding: "0px" }}>
+        <PageLayout padding="0px">
           <PageLayout.Header>
             <NavigationBar />
             <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
@@ -68,7 +68,7 @@ export default function App() {
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            {showBanner && <Banner bannerText="Apply code HIGHFIVE and get 10% discount on checkout!" />}
+            {showBanner && <Banner bannerText="As a premium customer you get 10% discount on checkout!" />}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

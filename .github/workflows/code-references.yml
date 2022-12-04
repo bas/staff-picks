@@ -1,6 +1,9 @@
 name: Find LaunchDarkly flag code references
 
-on: push
+on:
+  push:
+  workflow_dispatch:
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}

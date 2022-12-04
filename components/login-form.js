@@ -93,11 +93,11 @@ function LoginForm() {
     <Box display="flex">
       <Box flexGrow={1}>
         <TextInput
-          aria-label="Email"
-          name="email"
-          placeholder="Email"
+          aria-label="Name"
+          name="name"
+          placeholder="Name"
           readOnly={true}
-          value={identity ? identity.key : ""}
+          value={identity ? identity.name : ""}
         />
       </Box>
       <Box>

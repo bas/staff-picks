@@ -15,13 +15,13 @@ function NavigationBar() {
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Header.Link href="/">Home</Header.Link>
+        <Header.Link href={`${process.env.assetPrefix}/`}>Home</Header.Link>
       </Header.Item>
       <Header.Item>
         <Header.Link href="#">Staff picks</Header.Link>
       </Header.Item>
       <Header.Item full>
-        <Header.Link href="/about">About</Header.Link>
+        <Header.Link href={`${process.env.assetPrefix}/about`}>About</Header.Link>
       </Header.Item>
       {showLogin && (
         <Header.Item>

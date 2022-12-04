@@ -24,7 +24,7 @@ export default function About() {
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            <Text>About page</Text>
+            <Text as="p" paddingLeft="12px">About page</Text>
           </PageLayout.Content>
           <PageLayout.Footer>
             <Footer />

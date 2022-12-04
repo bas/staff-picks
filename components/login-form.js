@@ -1,79 +1,18 @@
 import { Box, TextInput, Button, Popover, Text } from "@primer/react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState } from "react";
+import { identities } from "../identities";
 
 function LoginForm() {
   const [identity, setIdentity] = useState();
   const [isOpen, setOpen] = useState(false);
   const ldClient = useLDClient();
 
-  const allProfiles = [
-    {
-      key: "alpha@example.com",
-      email: "alpha@example.com",
-      name: "Alpha",
-      country: "United States",
-      custom: {
-        region: "America",
-        premium: false,
-      },
-    },
-    {
-      key: "bravo@example.com",
-      email: "bravo@example.com",
-      name: "Bravo",
-      country: "Norway",
-      custom: {
-        region: "Europe",
-        premium: true,
-      },
-    },
-    {
-      key: "charlie@example.com",
-      email: "charlie@example.com",
-      name: "Charlie",
-      country: "United Kingdom",
-      custom: {
-        region: "Europe",
-        premium: false,
-      },
-    },
-    {
-      key: "delta@example.com",
-      email: "delta@example.com",
-      name: "Delta",
-      country: "Singapore",
-      custom: {
-        region: "Asia",
-        premium: true,
-      },
-    },
-    {
-      key: "echo@example.com",
-      email: "echo@example.com",
-      name: "Echo",
-      country: "United States",
-      custom: {
-        region: "America",
-        premium: true,
-      },
-    },
-    {
-      key: "foxtrot@example.com",
-      email: "foxtrot@example.com",
-      name: "Foxtrot",
-      country: "Australia",
-      custom: {
-        region: "Australia",
-        premium: false,
-      },
-    },
-  ];
-
   async function onSubmit() {
-    const num = Math.floor(Math.random() * allProfiles.length);
 
-    const newUser = allProfiles[num];
+    const num = Math.floor(Math.random() * identities.length);
+
+    const newUser = identities[num];
 
     setIdentity(newUser);
 

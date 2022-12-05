@@ -58,23 +58,23 @@ function LoginForm() {
           sx={{ marginLeft: ".5rem" }}
         />
         {identity && (
-          <Box justifyContent="right" display="flex">
+          <Box justifyContent="right" display="flex" color="black">
             <Popover open={isOpen} caret="top-right">
               <Popover.Content>
-                <Heading sx={{ color: "black", fontSize: 2 }}>Profile</Heading>
-                <Text as="p" color="black">
+                <Heading sx={{ fontSize: 2 }}>Profile</Heading>
+                <Text as="p">
                   Key: {identity.key}
                 </Text>
-                <Text as="p" color="black">
+                <Text as="p">
                   Name: {identity.name}
                 </Text>
-                <Text as="p" color="black">
+                <Text as="p">
                   Region: {identity.custom.region}
                 </Text>
-                <Text as="p" color="black">
+                <Text as="p">
                   Country: {identity.country}
                 </Text>
-                <Text as="p" color="black">
+                <Text as="p">
                   Premium: {identity.custom.premium ? "Yes" : "No"}
                 </Text>
                 <Button

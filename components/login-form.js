@@ -66,6 +66,9 @@ function LoginForm() {
                   Key: {identity.key}
                 </Text>
                 <Text as="p" color="black">
+                  Name: {identity.name}
+                </Text>
+                <Text as="p" color="black">
                   Region: {identity.custom.region}
                 </Text>
                 <Text as="p" color="black">

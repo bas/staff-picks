@@ -62,21 +62,28 @@ function LoginForm() {
           <Popover.Content>
             {identity && (
               <Box>
-                <Text as="p" color="black">
-                  Key: {identity.key}
-                </Text>
-                <Text as="p" color="black">
-                  Name: {identity.name}
-                </Text>
-                <Text as="p" color="black">
-                  Region: {identity.custom.region}
-                </Text>
-                <Text as="p" color="black">
-                  Country: {identity.country}
-                </Text>
-                <Text as="p" color="black">
-                  Premium: {identity.custom.premium ? "Yes" : "No"}
-                </Text>
+                <Box borderBottom="solid" borderColor="border.default" borderWidth={1}>
+                  <Text as="p" color="black" fontWeight="bold" fontSize={2}>
+                    Profile
+                  </Text>
+                </Box>
+                <Box>
+                  <Text as="p" color="black">
+                    Key: {identity.key}
+                  </Text>
+                  <Text as="p" color="black">
+                    Name: {identity.name}
+                  </Text>
+                  <Text as="p" color="black">
+                    Region: {identity.custom.region}
+                  </Text>
+                  <Text as="p" color="black">
+                    Country: {identity.country}
+                  </Text>
+                  <Text as="p" color="black">
+                    Premium: {identity.custom.premium ? "Yes" : "No"}
+                  </Text>
+                </Box>
               </Box>
             )}
             <Button onClick={toggleOpen}>Got it!</Button>

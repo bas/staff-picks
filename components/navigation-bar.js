@@ -10,7 +10,7 @@ function NavigationBar() {
   const { showLogin } = useFlags();
 
   return (
-    <Header>
+    <Header sx={{ paddingRight: "0px"}}>
       <Header.Item>
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>

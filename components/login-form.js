@@ -5,6 +5,7 @@ import {
   Popover,
   Text,
   IconButton,
+  Heading,
 } from "@primer/react";
 import { PersonIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
@@ -15,6 +16,8 @@ function LoginForm() {
   const [identity, setIdentity] = useState();
   const [isOpen, setOpen] = useState(false);
   const ldClient = useLDClient();
+
+  useEffect(() => {}, [isOpen]);
 
   async function onSubmit() {
     const num = Math.floor(Math.random() * identities.length);
@@ -31,17 +34,7 @@ function LoginForm() {
         console.log(userFlags);
       });
 
-      setOpen(true);
-    }
-  }
-
-  useEffect(() => {}, [isOpen]);
-
-  function toggleOpen() {
-    if (isOpen) {
-      setOpen(false);
-    } else {
-      setOpen(true);
+      //setOpen(true);
     }
   }
 
@@ -57,47 +50,43 @@ function LoginForm() {
       <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
         Sign in
       </Button>
-      <Box pt={5} justifyContent="right" display="flex">
-        <Popover open={isOpen} caret="top-right">
-          <Popover.Content>
-            {identity && (
-              <Box>
-                <Box borderBottom="solid" borderColor="border.default" borderWidth={1}>
-                  <Text as="p" color="black" fontWeight="bold" fontSize={2}>
-                    Profile
-                  </Text>
-                </Box>
-                <Box>
-                  <Text as="p" color="black">
-                    Key: {identity.key}
-                  </Text>
-                  <Text as="p" color="black">
-                    Name: {identity.name}
-                  </Text>
-                  <Text as="p" color="black">
-                    Region: {identity.custom.region}
-                  </Text>
-                  <Text as="p" color="black">
-                    Country: {identity.country}
-                  </Text>
-                  <Text as="p" color="black">
-                    Premium: {identity.custom.premium ? "Yes" : "No"}
-                  </Text>
-                </Box>
-              </Box>
-            )}
-            <Button onClick={toggleOpen}>Got it!</Button>
-          </Popover.Content>
-        </Popover>
-      </Box>
-      {identity && (
+      <Box position="relative">
         <IconButton
-          aria-label="Search"
+          aria-label="Profile"
           icon={PersonIcon}
-          onClick={toggleOpen}
+          onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
           sx={{ marginLeft: ".5rem" }}
         />
-      )}
+        {identity && (
+          <Box justifyContent="right" display="flex">
+            <Popover open={isOpen} caret="top-right">
+              <Popover.Content>
+                <Heading sx={{ color: "black", fontSize: 2 }}>Profile</Heading>
+                <Text as="p" color="black">
+                  Key: {identity.key}
+                </Text>
+                <Text as="p" color="black">
+                  Name: {identity.name}
+                </Text>
+                <Text as="p" color="black">
+                  Region: {identity.custom.region}
+                </Text>
+                <Text as="p" color="black">
+                  Country: {identity.country}
+                </Text>
+                <Text as="p" color="black">
+                  Premium: {identity.custom.premium ? "Yes" : "No"}
+                </Text>
+                <Button
+                  onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
+                >
+                  Got it!
+                </Button>
+              </Popover.Content>
+            </Popover>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 }

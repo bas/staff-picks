@@ -58,7 +58,7 @@ export default function App() {
       <BaseStyles>
         <Head>
           <title>Staff picks</title>
-          <link rel="shortcut icon" href="/favicon.svg" />
+          <link rel="shortcut icon" href={`${process.env.assetPrefix}/favicon.svg`} />
         </Head>
         <PageLayout padding="0px">
           <PageLayout.Header>

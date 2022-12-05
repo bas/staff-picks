@@ -75,6 +75,9 @@ function LoginForm() {
                   Country: {identity.country}
                 </Text>
                 <Text as="p">
+                  City: {identity.custom.city}
+                </Text>
+                <Text as="p">
                   Premium: {identity.custom.premium ? "Yes" : "No"}
                 </Text>
                 <Button

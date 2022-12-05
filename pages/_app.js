@@ -14,6 +14,7 @@ export default withLDProvider({
   user: { key: "anon", anonymous: true },
   options: {
     bootstrap: "localStorage",
+    privateAttributeNames: ["city"],
   },
   reactOptions: {
     useCamelCaseFlagKeys: true,

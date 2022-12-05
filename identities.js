@@ -6,6 +6,7 @@ export const identities = [
     country: "United States",
     custom: {
       region: "America",
+      city: "Chicago",
       premium: false,
     },
   },
@@ -16,6 +17,7 @@ export const identities = [
     country: "Norway",
     custom: {
       region: "Europe",
+      city: "Oslo",
       premium: true,
     },
   },
@@ -26,6 +28,7 @@ export const identities = [
     country: "United Kingdom",
     custom: {
       region: "Europe",
+      city: "London",
       premium: false,
     },
   },
@@ -36,6 +39,7 @@ export const identities = [
     country: "Singapore",
     custom: {
       region: "Asia",
+      city: "Singapore",
       premium: true,
     },
   },
@@ -46,6 +50,7 @@ export const identities = [
     country: "United States",
     custom: {
       region: "America",
+      city: "Oakland",
       premium: true,
     },
   },
@@ -56,6 +61,7 @@ export const identities = [
     country: "Australia",
     custom: {
       region: "Australia",
+      city: "Sydney",
       premium: false,
     },
   },

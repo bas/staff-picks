@@ -80,6 +80,9 @@ function LoginForm() {
                 <Text as="p">
                   Premium: {identity.custom.premium ? "Yes" : "No"}
                 </Text>
+                <Text as="p">
+                  Staff: {identity.custom.staff ? "Yes" : "No"}
+                </Text>
                 <Button
                   onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
                 >

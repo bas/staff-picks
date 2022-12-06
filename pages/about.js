@@ -1,27 +1,40 @@
-import { BaseStyles, Box, Text, PageLayout, Heading } from "@primer/react";
-import Head from "next/head";
+import { BaseStyles, Box, Text, PageLayout } from "@primer/react";
 import Footer from "../components/footer";
 import NavigationBar from "../components/navigation-bar";
+import PageHead from "../components/page-head";
 import { identities } from "../identities";
 import React from "react";
+import PageHeading from "../components/page-heading";
+
+function Cell({ value }) {
+  return (
+    <Box p={3} borderColor="border.default" borderWidth={1} borderStyle="solid">
+      {value}
+    </Box>
+  );
+}
 
 export default function About() {
+  const columns = [
+    "Key",
+    "Name",
+    "Region",
+    "Country",
+    "City (private)",
+    "Premium",
+  ];
+
   return (
     <div className="App">
       <BaseStyles>
-        <Head>
-          <title>Staff picks</title>
-          <link rel="shortcut icon" href="/favicon.svg" />
-        </Head>
+        <PageHead />
         <PageLayout sx={{ padding: "0px" }}>
           <PageLayout.Header>
             <NavigationBar />
-            <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
-              About
-            </Heading>
+            <PageHeading headingText="About" />
           </PageLayout.Header>
           <PageLayout.Content>
-            <Box padding="12px">
+            <Box padding="0px 12px 12px 12px">
               <Text as="p">
                 The following identities are avaiable for targeting:
               </Text>
@@ -30,110 +43,26 @@ export default function About() {
                 gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr"
                 gridGap={1}
               >
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  Key
-                </Box>
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  Name
-                </Box>
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  Region
-                </Box>
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  Country
-                </Box>
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  City (private)
-                </Box>
-                <Box
-                  p={3}
-                  borderColor="border.default"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  fontWeight="bold"
-                >
-                  Premium
-                </Box>
+                {columns.map((column) => (
+                  <Box
+                    key={column}
+                    p={3}
+                    borderColor="border.default"
+                    borderWidth={1}
+                    borderStyle="solid"
+                    fontWeight="bold"
+                  >
+                    {column}
+                  </Box>
+                ))}
                 {identities.map((identity) => (
                   <React.Fragment key={identity.key}>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.key}
-                    </Box>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.name}
-                    </Box>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.custom.region}
-                    </Box>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.country}
-                    </Box>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.custom.city}
-                    </Box>
-                    <Box
-                      p={3}
-                      borderColor="border.default"
-                      borderWidth={1}
-                      borderStyle="solid"
-                    >
-                      {identity.custom.premium ? "Yes" : "No"}
-                    </Box>
+                    <Cell value={identity.key} />
+                    <Cell value={identity.name} />
+                    <Cell value={identity.custom.region} />
+                    <Cell value={identity.country} />
+                    <Cell value={identity.custom.city} />
+                    <Cell value={identity.custom.premium ? "Yes" : "No"} />
                   </React.Fragment>
                 ))}
               </Box>

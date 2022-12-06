@@ -1,15 +1,11 @@
-import {
-  BaseStyles,
-  Box,
-  PageLayout,
-  Heading,
-} from "@primer/react";
-import Head from "next/head";
+import { BaseStyles, Box, PageLayout } from "@primer/react";
 import BookList from "../components/book-list";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import Banner from "../components/banner";
 import Footer from "../components/footer";
-import NavigationBar from "../components/navigation-bar"
+import PageHead from "../components/page-head";
+import NavigationBar from "../components/navigation-bar";
+import PageHeading from "../components/page-heading";
 
 export default function App() {
   const { showBanner } = useFlags();
@@ -56,19 +52,16 @@ export default function App() {
   return (
     <div className="App">
       <BaseStyles>
-        <Head>
-          <title>Staff picks</title>
-          <link rel="shortcut icon" href={`${process.env.assetPrefix}/favicon.svg`} />
-        </Head>
+        <PageHead />
         <PageLayout padding="0px">
           <PageLayout.Header>
             <NavigationBar />
-            <Heading sx={{ fontSize: 3, padding: "12px 12px 0px 12px" }}>
-              Staff picks
-            </Heading>
+            <PageHeading headingText="Staff picks"/>
           </PageLayout.Header>
           <PageLayout.Content>
-            {showBanner && <Banner bannerText="As a premium customer you get 10% discount on checkout!" />}
+            {showBanner && (
+              <Banner bannerText="As a premium customer you get 10% discount on checkout!" />
+            )}
             <Box>
               <BookList allBooks={allBooks} />
             </Box>

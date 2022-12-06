@@ -17,9 +17,6 @@ function NavigationBar() {
       <Header.Item>
         <Header.Link href={`${process.env.assetPrefix}/`}>Home</Header.Link>
       </Header.Item>
-      <Header.Item>
-        <Header.Link href="#">Staff picks</Header.Link>
-      </Header.Item>
       <Header.Item full>
         <Header.Link href={`${process.env.assetPrefix}/about`}>About</Header.Link>
       </Header.Item>

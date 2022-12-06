@@ -68,7 +68,7 @@ export default function About() {
                 {identities.map((identity) => (
                   <React.Fragment key={identity.key}>
                     <Cell value={identity.key} />
-                    <Cell value={`${identity.name} ${identity.custom.staff ? "*" : ""}`} />
+                    <Cell value={`${identity.name}${identity.custom.staff ? "*" : ""}`} />
                     <Cell value={identity.custom.region} />
                     <Cell value={identity.country} />
                     <Cell value={identity.custom.city} />
@@ -76,7 +76,7 @@ export default function About() {
                   </React.Fragment>
                 ))}
               </Box>
-              <Text as="p" fontSize={1}>Names marked with a '*' are staff members.</Text>
+              <Text as="p" fontSize={1}>Names marked with a * are staff members.</Text>
             </Box>
           </PageLayout.Content>
           <PageLayout.Footer>

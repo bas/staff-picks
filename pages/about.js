@@ -21,7 +21,7 @@ export default function About() {
             </Heading>
           </PageLayout.Header>
           <PageLayout.Content>
-            <Box p={12}>
+            <Box padding="12px">
               <Text as="p">
                 The following identities are avaiable for targeting:
               </Text>

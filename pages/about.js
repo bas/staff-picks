@@ -1,4 +1,5 @@
 import { BaseStyles, Box, Text, PageLayout } from "@primer/react";
+import Image from "next/image";
 import Footer from "../components/footer";
 import NavigationBar from "../components/navigation-bar";
 import PageHead from "../components/page-head";
@@ -36,6 +37,15 @@ export default function About() {
           <PageLayout.Content>
             <Box padding="0px 12px 12px 12px">
               <Text as="p">
+                Scan the following code to open the website:
+              </Text>
+              <Image
+                src={`${process.env.assetPrefix}/images/qrcode.png`}
+                alt="QR Code"
+                height={60}
+                width={60}
+              />
+              <Text as="p">
                 The following identities are avaiable for targeting:
               </Text>
               <Box
@@ -58,7 +68,7 @@ export default function About() {
                 {identities.map((identity) => (
                   <React.Fragment key={identity.key}>
                     <Cell value={identity.key} />
-                    <Cell value={identity.name} />
+                    <Cell value={`${identity.name} ${identity.custom.staff ? "*" : ""}`} />
                     <Cell value={identity.custom.region} />
                     <Cell value={identity.country} />
                     <Cell value={identity.custom.city} />
@@ -66,6 +76,7 @@ export default function About() {
                   </React.Fragment>
                 ))}
               </Box>
+              <Text as="p" fontSize={1}>Names marked with a '*' are staff members.</Text>
             </Box>
           </PageLayout.Content>
           <PageLayout.Footer>

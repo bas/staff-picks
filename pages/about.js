@@ -27,7 +27,7 @@ export default function About() {
             <Box
               padding="12px"
               display="grid"
-              gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
+              gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr"
               gridGap={1}
             >
               <Box
@@ -73,6 +73,15 @@ export default function About() {
                 borderStyle="solid"
                 fontWeight="bold"
               >
+                City (private)
+              </Box>
+              <Box
+                p={3}
+                borderColor="border.default"
+                borderWidth={1}
+                borderStyle="solid"
+                fontWeight="bold"
+              >
                 Premium
               </Box>
               {identities.map((identity) => (
@@ -108,6 +117,14 @@ export default function About() {
                     borderStyle="solid"
                   >
                     {identity.country}
+                  </Box>
+                  <Box
+                    p={3}
+                    borderColor="border.default"
+                    borderWidth={1}
+                    borderStyle="solid"
+                  >
+                    {identity.custom.city}
                   </Box>
                   <Box
                     p={3}

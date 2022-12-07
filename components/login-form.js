@@ -83,6 +83,12 @@ function LoginForm() {
                 <Text as="p">
                   Staff: {identity.custom.staff ? "Yes" : "No"}
                 </Text>
+                <Text as="p">
+                  Device: {identity.custom.device}
+                </Text>
+                <Text as="p">
+                  OS: {identity.custom.operatingSystem}
+                </Text>
                 <Button
                   onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
                 >

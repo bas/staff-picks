@@ -7,22 +7,68 @@ import {
   IconButton,
   Heading,
 } from "@primer/react";
-import { PersonIcon } from "@primer/octicons-react";
+import { PersonIcon, MailIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
-import { identities } from "../identities";
+import { deviceType, osName } from "react-device-detect";
+import { uniqueNamesGenerator, names } from "unique-names-generator";
 
 function LoginForm() {
   const [identity, setIdentity] = useState();
   const [isOpen, setOpen] = useState(false);
+  const [name, setName] = useState("");
   const ldClient = useLDClient();
 
   useEffect(() => {}, [isOpen]);
 
-  async function onSubmit() {
-    const num = Math.floor(Math.random() * identities.length);
+  function getContext() {
+    const countries = [
+      "United States",
+      "Canada",
+      "Japan",
+      "Singapore",
+      "Norway",
+      "United Kingdom",
+      "The Netherlands",
+      "Germany",
+      "Indonesia",
+      "Australia",
+      "India",
+      "Namibia",
+      "France",
+      "Italy",
+      "Chile",
+    ];
 
-    const newUser = identities[num];
+    const randomCountry = uniqueNamesGenerator({
+      dictionaries: [countries],
+    });
+
+    let randomName = uniqueNamesGenerator({
+      dictionaries: [names],
+    });
+
+    if (name.length > 2) randomName = name;
+
+    const email = randomName.toLowerCase() + "@example.com";
+
+    let userContext = {
+      key: email,
+      email: email,
+      name: randomName,
+      country: randomCountry,
+      custom: {
+        premium: Math.random() < 0.5,
+        staff: Math.random() < 0.5,
+        device: deviceType,
+        operatingSystem: osName,
+      },
+    };
+    return userContext;
+  }
+
+  async function onSubmit() {
+    const newUser = getContext();
 
     setIdentity(newUser);
 
@@ -34,7 +80,7 @@ function LoginForm() {
         console.log(userFlags);
       });
 
-      //setOpen(true);
+      setName(newUser.name);
     }
   }
 
@@ -44,8 +90,8 @@ function LoginForm() {
         aria-label="Name"
         name="name"
         placeholder="Name"
-        readOnly={true}
-        value={identity ? identity.name : ""}
+        onChange={(e) => setName(e.target.value)}
+        value={name}
       />
       <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
         Sign in
@@ -63,32 +109,18 @@ function LoginForm() {
               <Popover.Content>
                 <Heading sx={{ fontSize: 2 }}>Profile</Heading>
                 <Text as="p">
-                  Key: {identity.key}
+                  <MailIcon size={16} /> {identity.email}
                 </Text>
-                <Text as="p">
-                  Name: {identity.name}
-                </Text>
-                <Text as="p">
-                  Region: {identity.custom.region}
-                </Text>
-                <Text as="p">
-                  Country: {identity.country}
-                </Text>
-                <Text as="p">
-                  City: {identity.custom.city}
-                </Text>
+                <Text as="p">Name: {identity.name}</Text>
+                <Text as="p">Country: {identity.country}</Text>
                 <Text as="p">
                   Premium: {identity.custom.premium ? "Yes" : "No"}
                 </Text>
                 <Text as="p">
                   Staff: {identity.custom.staff ? "Yes" : "No"}
                 </Text>
-                <Text as="p">
-                  Device: {identity.custom.device}
-                </Text>
-                <Text as="p">
-                  OS: {identity.custom.operatingSystem}
-                </Text>
+                <Text as="p">Device: {identity.custom.device}</Text>
+                <Text as="p">OS: {identity.custom.operatingSystem}</Text>
                 <Button
                   onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
                 >

@@ -16,7 +16,8 @@
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Footer from "../components/footer";
 import NavigationBar from "../components/navigation-bar";
 import PageHead from "../components/page-head";
-import { identities } from "../identities";
 import React from "react";
 import PageHeading from "../components/page-heading";
 

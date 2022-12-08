@@ -1,3 +1,5 @@
+import { deviceType, osName } from "react-device-detect";
+
 export const identities = [
   {
     key: "alpha@example.com",
@@ -9,6 +11,8 @@ export const identities = [
       city: "Chicago",
       premium: false,
       staff: true,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
   {
@@ -21,6 +25,8 @@ export const identities = [
       city: "Oslo",
       premium: true,
       staff: false,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
   {
@@ -33,6 +39,8 @@ export const identities = [
       city: "London",
       premium: false,
       staff: false,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
   {
@@ -45,6 +53,8 @@ export const identities = [
       city: "Singapore",
       premium: true,
       staff: false,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
   {
@@ -57,6 +67,8 @@ export const identities = [
       city: "Oakland",
       premium: true,
       staff: false,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
   {
@@ -69,6 +81,8 @@ export const identities = [
       city: "Sydney",
       premium: false,
       staff: true,
+      device: deviceType,
+      operatingSystem: osName,
     },
   },
 ];

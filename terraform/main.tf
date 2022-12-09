@@ -161,3 +161,24 @@ resource "launchdarkly_feature_flag" "show_banner" {
     "terraform",   
   ]
 }
+
+resource "launchdarkly_metric" "add_to_cart" {
+  project_key    = launchdarkly_project.terraform.key
+  key            = "add-to-cart"
+  name           = "Add to cart"
+  description    = "Custom event when a user clicks the add to cart button"
+  kind           = "custom"
+  event_key      = "add-to-cart"
+  is_numeric     = false
+  tags           = ["terraform"]
+}
+resource "launchdarkly_metric" "buy_now" {
+  project_key    = launchdarkly_project.terraform.key
+  key            = "buy-now"
+  name           = "Buy now"
+  description    = "Custom event when a user clicks the buy now button"
+  kind           = "custom"
+  event_key      = "buy-now" 
+  is_numeric     = false
+  tags           = ["terraform"]
+}

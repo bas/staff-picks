@@ -1,10 +1,11 @@
 import { Box, Text, Button } from "@primer/react";
 import Image from "next/image";
-import { useFlags } from "launchdarkly-react-client-sdk";
+import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 
 function BookList({ allBooks }) {
   const { showBookRating, showBuyNowButton } = useFlags();
+  const ldClient = useLDClient();
 
   return (
     <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>
@@ -51,7 +52,7 @@ function BookList({ allBooks }) {
               <Button
                 variant={showBuyNowButton ? "default" : "primary"}
                 sx={{ float: "right" }}
-                onClick={() => console.log("Add to cart button clicked.")}
+                onClick={() => ldClient.track("add-to-cart")}
               >
                 Add to cart
               </Button>
@@ -61,7 +62,7 @@ function BookList({ allBooks }) {
                 <Button
                   variant="primary"
                   sx={{ float: "right" }}
-                  onClick={() => console.log("Buy now button clicked.")}
+                  onClick={() => ldClient.track("buy-now")}
                 >
                   Buy now
                 </Button>

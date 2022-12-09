@@ -103,8 +103,13 @@ function LoginForm() {
         onFocus={() => setName("")}
         onChange={(e) => setName(e.target.value)}
         value={name}
+        disabled={identity ? true : false}
       />
-      <Button sx={{ marginLeft: ".5rem" }} onClick={onSubmit}>
+      <Button
+        sx={{ marginLeft: ".5rem" }}
+        onClick={onSubmit}
+        disabled={identity ? true : false}
+      >
         Sign in
       </Button>
       <Box position="relative">

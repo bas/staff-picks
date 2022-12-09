@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../pages/index";
 import "@testing-library/jest-dom";
 import { ThemeProvider } from "@primer/react";
@@ -11,7 +11,7 @@ describe("App", () => {
 
   it("renders a heading", () => {
     mockFlags({
-      ffPageTitle: "Staff picks",
+      showBanner: false,
     });
     render(
       <ThemeProvider>
@@ -24,5 +24,20 @@ describe("App", () => {
     });
 
     expect(heading).toBeInTheDocument();
+  });
+
+  it("clicks the buy now button", () => {
+    mockFlags({
+      showBuyNowButton: true,
+      showBanner: false,
+    });
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
+
+    const button = screen.getAllByRole("button", { name: /Buy now/i });
+    expect(fireEvent.click(button[0]));
   });
 });

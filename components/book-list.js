@@ -57,7 +57,11 @@ function BookList({ allBooks }) {
             </Box>
             {showBuyNowButton && (
               <Box pt={6}>
-                <Button variant="primary" sx={{ float: "right" }}>
+                <Button
+                  variant="primary"
+                  sx={{ float: "right" }}
+                  onClick={() => console.log("Buy now button clicked.")}
+                >
                   Buy now
                 </Button>
               </Box>

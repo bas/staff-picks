@@ -67,6 +67,16 @@ function LoginForm() {
     return userContext;
   }
 
+  async function onSignOut() {
+    setIdentity();
+
+    if (ldClient) {
+      ldClient.identify({ key: "anon", anonymous: true });
+
+      setName("");
+    }
+  }
+
   async function onSubmit() {
     const newUser = getContext();
 
@@ -90,6 +100,7 @@ function LoginForm() {
         aria-label="Name"
         name="name"
         placeholder="Name"
+        onFocus={() => setName("")}
         onChange={(e) => setName(e.target.value)}
         value={name}
       />
@@ -121,11 +132,17 @@ function LoginForm() {
                 </Text>
                 <Text as="p">Device: {identity.custom.device}</Text>
                 <Text as="p">OS: {identity.custom.operatingSystem}</Text>
-                <Button
-                  onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
-                >
-                  Got it!
-                </Button>
+                <Box display="flex">
+                  <Button
+                    variant="primary"
+                    onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
+                  >
+                    Close
+                  </Button>
+                  <Button onClick={onSignOut} sx={{ marginLeft: ".5rem" }}>
+                    Sign out
+                  </Button>
+                </Box>
               </Popover.Content>
             </Popover>
           </Box>

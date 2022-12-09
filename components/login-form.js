@@ -100,7 +100,6 @@ function LoginForm() {
         aria-label="Name"
         name="name"
         placeholder="Name"
-        onFocus={() => setName("")}
         onChange={(e) => setName(e.target.value)}
         value={name}
         disabled={identity ? true : false}

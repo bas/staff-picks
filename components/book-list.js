@@ -51,6 +51,7 @@ function BookList({ allBooks }) {
               <Button
                 variant={showBuyNowButton ? "default" : "primary"}
                 sx={{ float: "right" }}
+                onClick={() => console.log("Add to cart button clicked.")}
               >
                 Add to cart
               </Button>

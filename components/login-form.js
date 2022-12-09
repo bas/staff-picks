@@ -10,8 +10,7 @@ import {
 import { PersonIcon, MailIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
-import { deviceType, osName } from "react-device-detect";
-import { uniqueNamesGenerator, names } from "unique-names-generator";
+import { getContext} from "../utils/loginHelper"
 
 function LoginForm() {
   const [identity, setIdentity] = useState();
@@ -20,52 +19,6 @@ function LoginForm() {
   const ldClient = useLDClient();
 
   useEffect(() => {}, [isOpen]);
-
-  function getContext() {
-    const countries = [
-      "United States",
-      "Canada",
-      "Japan",
-      "Singapore",
-      "Norway",
-      "United Kingdom",
-      "The Netherlands",
-      "Germany",
-      "Indonesia",
-      "Australia",
-      "India",
-      "Namibia",
-      "France",
-      "Italy",
-      "Chile",
-    ];
-
-    const randomCountry = uniqueNamesGenerator({
-      dictionaries: [countries],
-    });
-
-    let randomName = uniqueNamesGenerator({
-      dictionaries: [names],
-    });
-
-    if (name.length > 2) randomName = name;
-
-    const email = randomName.toLowerCase() + "@example.com";
-
-    let userContext = {
-      key: email,
-      email: email,
-      name: randomName,
-      country: randomCountry,
-      custom: {
-        premium: Math.random() < 0.5,
-        staff: Math.random() < 0.5,
-        device: deviceType,
-        operatingSystem: osName,
-      },
-    };
-    return userContext;
-  }
 
   async function onSignOut() {
     setIdentity();
@@ -77,8 +30,8 @@ function LoginForm() {
     }
   }
 
-  async function onSubmit() {
-    const newUser = getContext();
+  async function onSignIn() {
+    const newUser = getContext({name: name});
 
     setIdentity(newUser);
 
@@ -106,7 +59,7 @@ function LoginForm() {
       />
       <Button
         sx={{ marginLeft: ".5rem" }}
-        onClick={onSubmit}
+        onClick={onSignIn}
         disabled={identity ? true : false}
       >
         Sign in

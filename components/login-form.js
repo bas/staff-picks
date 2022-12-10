@@ -7,10 +7,10 @@ import {
   IconButton,
   Heading,
 } from "@primer/react";
-import { PersonIcon, MailIcon } from "@primer/octicons-react";
+import { PersonIcon, MailIcon, SignOutIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
-import { getContext} from "../utils/loginHelper"
+import { getContext } from "../utils/loginHelper";
 
 function LoginForm() {
   const [identity, setIdentity] = useState();
@@ -31,7 +31,7 @@ function LoginForm() {
   }
 
   async function onSignIn() {
-    const newUser = getContext({name: name});
+    const newUser = getContext({ name: name });
 
     setIdentity(newUser);
 
@@ -64,13 +64,12 @@ function LoginForm() {
       >
         Sign in
       </Button>
-      <Button
+      <IconButton
+        icon={SignOutIcon}
         sx={{ marginLeft: ".5rem" }}
         onClick={onSignOut}
         disabled={identity ? false : true}
-      >
-        Sign out
-      </Button>
+      />
       <Box position="relative">
         <IconButton
           aria-label="Profile"

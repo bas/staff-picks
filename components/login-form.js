@@ -64,6 +64,13 @@ function LoginForm() {
       >
         Sign in
       </Button>
+      <Button
+        sx={{ marginLeft: ".5rem" }}
+        onClick={onSignOut}
+        disabled={identity ? false : true}
+      >
+        Sign out
+      </Button>
       <Box position="relative">
         <IconButton
           aria-label="Profile"

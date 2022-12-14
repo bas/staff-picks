@@ -169,7 +169,8 @@ resource "launchdarkly_metric" "add_to_cart" {
   description    = "Custom event when a user clicks the add to cart button"
   kind           = "custom"
   event_key      = "add-to-cart"
-  is_numeric     = false
+  is_numeric     = true
+  unit           = "qty"
   tags           = ["terraform"]
 }
 resource "launchdarkly_metric" "buy_now" {
@@ -179,6 +180,7 @@ resource "launchdarkly_metric" "buy_now" {
   description    = "Custom event when a user clicks the buy now button"
   kind           = "custom"
   event_key      = "buy-now" 
-  is_numeric     = false
+  is_numeric     = true
+    unit         = "qty"
   tags           = ["terraform"]
 }

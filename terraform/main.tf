@@ -170,24 +170,24 @@ resource "launchdarkly_feature_flag" "control_background_color" {
 
   variation_type = "string"
   variations {
+    value       = "#D0417E"
+    name        = "Magenta background"
+    description = "Shhow the magenta background"
+  }
+  variations {
     value       = "#000000"
     name        = "Black background"
     description = "Show the black background"
   }
   variations {
-    value       = "#D0417E"
-    name        = "Magenta background"
-    description = "Shhow the magenta background"
-  }
-    variations {
     value       = "#19543E"
     name        = "Green background"
     description = "Show the green background"
   }
 
   defaults {
-    on_variation = 1
-    off_variation = 0
+    on_variation = 0
+    off_variation = 1
   }
 
   tags = [

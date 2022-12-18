@@ -106,6 +106,17 @@ resource "launchdarkly_feature_flag" "show_book_rating" {
   ]
 }
 
+resource "launchdarkly_flag_trigger" "show_book_rating_trigger" {
+    project_key = launchdarkly_project.terraform.key
+    env_key = launchdarkly_project.terraform.environments[0].key
+    flag_key = launchdarkly_feature_flag.show_book_rating.key
+    integration_key = "generic-trigger"
+    instructions {
+        kind = "turnFlagOff"
+    }
+    enabled = false
+}
+
 resource "launchdarkly_feature_flag" "show_buy_now_button" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-buy-now-button"

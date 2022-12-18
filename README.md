@@ -11,7 +11,7 @@ npm run dev
 
 Go to http://localhost:3000/ in your browser to visit the web app. You should see a page like this:
 
-<img width="1065" alt="Screenshot 2022-11-06 at 15 58 32" src="https://user-images.githubusercontent.com/1982588/200178229-4c251d03-a4be-4d16-bdff-c4ed095ab795.png">
+<img width="1074" alt="Screenshot 2022-12-18 at 12 20 57" src="https://user-images.githubusercontent.com/1982588/208295564-d9c7890f-3911-40f9-b994-27a7b528e00d.png">
 
 For LaunchDarkly to work you need to add a `.env` file with the following:
 

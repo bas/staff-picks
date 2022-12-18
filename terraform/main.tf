@@ -162,6 +162,34 @@ resource "launchdarkly_feature_flag" "show_banner" {
   ]
 }
 
+resource "launchdarkly_feature_flag" "enable-api" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "enable-api"
+  name        = "Enable API 1.2"
+  description = "This flag controls the backend API 1.2"
+
+  variation_type = "boolean"
+  variations {
+    value       = "true"
+    name        = "Enable API"
+    description = "Enables the backend API 1.2"
+  }
+  variations {
+    value       = "false"
+    name        = "Disable API"
+    description = "Disables the backend API 1.2"
+  }
+  
+  defaults {
+    on_variation = 0
+    off_variation = 1
+  }
+
+  tags = [
+    "terraform",   
+  ]
+}
+
 resource "launchdarkly_metric" "add_to_cart" {
   project_key    = launchdarkly_project.terraform.key
   key            = "add-to-cart"

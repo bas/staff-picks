@@ -2,7 +2,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../pages/index";
 import "@testing-library/jest-dom";
 import { ThemeProvider } from "@primer/react";
-import { mockFlags, resetLDMocks } from "jest-launchdarkly-mock";
+import { mockFlags, resetLDMocks, ldClientMock } from "jest-launchdarkly-mock";
+import LoginForm from "../components/login-form";
 
 describe("App", () => {
   beforeEach(() => {
@@ -39,5 +40,18 @@ describe("App", () => {
 
     const button = screen.getAllByRole("button", { name: /Buy now/i });
     expect(fireEvent.click(button[0]));
+  });
+
+  it("should identify on click", () => {
+    render(
+      <ThemeProvider>
+        <LoginForm />
+      </ThemeProvider>
+    );
+    const signInButton = screen.getAllByRole("button", { name: /Sign in/i });
+    fireEvent.click(signInButton[0]);
+
+    // assert: identify gets called
+    expect(ldClientMock.identify).toBeCalled();
   });
 });

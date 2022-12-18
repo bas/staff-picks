@@ -180,9 +180,14 @@ resource "launchdarkly_feature_flag" "control_background_color" {
     description = "Show the black background"
   }
   variations {
-    value       = "#19543E"
-    name        = "Green background"
-    description = "Show the green background"
+    value       = "#58595B"
+    name        = "Gray background"
+    description = "Show the gray background"
+  }
+  variations {
+    value       = "#405BFF"
+    name        = "Blue background"
+    description = "Show the blue background"
   }
 
   defaults {

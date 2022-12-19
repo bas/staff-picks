@@ -3,8 +3,6 @@ import { uniqueNamesGenerator, names } from "unique-names-generator";
 
 const countries = [
   "United States",
-  "Canada",
-  "Japan",
   "Singapore",
   "Norway",
   "United Kingdom",
@@ -17,11 +15,19 @@ const countries = [
   "France",
   "Italy",
   "Finland",
+  "Ireland",
+  "Portugal",
 ];
 
-export function getContext( {name} ) {
+const releaseStage = ["team", "staff", "private-beta", "public-beta"];
+
+export function getContext({ name }) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
+  });
+
+  const randomReleaseStage = uniqueNamesGenerator({
+    dictionaries: [releaseStage],
   });
 
   let randomName = uniqueNamesGenerator({
@@ -42,6 +48,7 @@ export function getContext( {name} ) {
       staff: Math.random() < 0.5,
       device: deviceType,
       operatingSystem: osName,
+      releaseStage: randomReleaseStage
     },
   };
   return userContext;

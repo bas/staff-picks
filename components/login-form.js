@@ -83,7 +83,7 @@ function LoginForm() {
             <Popover open={isOpen} caret="top-right">
               <Popover.Content>
                 <Heading sx={{ fontSize: 2 }}>Profile</Heading>
-                <Text as="p">
+                <Text as="p" sx={{ whiteSpace: 'nowrap' }}>
                   <MailIcon size={16} /> {identity.email}
                 </Text>
                 <Text as="p">Name: {identity.name}</Text>

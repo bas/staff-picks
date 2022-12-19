@@ -19,15 +19,9 @@ const countries = [
   "Portugal",
 ];
 
-const releaseStage = ["team", "staff", "private-beta", "public-beta"];
-
 export function getContext({ name }) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
-  });
-
-  const randomReleaseStage = uniqueNamesGenerator({
-    dictionaries: [releaseStage],
   });
 
   let randomName = uniqueNamesGenerator({
@@ -48,7 +42,6 @@ export function getContext({ name }) {
       staff: Math.random() < 0.5,
       device: deviceType,
       operatingSystem: osName,
-      releaseStage: randomReleaseStage
     },
   };
   return userContext;

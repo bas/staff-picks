@@ -94,6 +94,7 @@ function LoginForm() {
                 <Text as="p">
                   Staff: {identity.custom.staff ? "Yes" : "No"}
                 </Text>
+                <Text as="p">Groups: {identity.custom.groups.toString()}</Text>
                 <Text as="p">Device: {identity.custom.device}</Text>
                 <Text as="p">OS: {identity.custom.operatingSystem}</Text>
                 <Box display="flex">

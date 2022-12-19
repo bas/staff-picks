@@ -19,6 +19,13 @@ const countries = [
   "Portugal",
 ];
 
+const groups = [
+  ["alpha","beta"],
+  ["alpha"],
+  ["beta"],
+  []
+]
+
 export function getContext({ name }) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
@@ -42,7 +49,11 @@ export function getContext({ name }) {
       staff: Math.random() < 0.5,
       device: deviceType,
       operatingSystem: osName,
+      groups: groups[Math.floor(Math.random() * 4)],
     },
   };
+
+  console.log(userContext);
+
   return userContext;
 }

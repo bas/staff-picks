@@ -10,13 +10,13 @@ const countries = [
   "United Kingdom",
   "The Netherlands",
   "Germany",
-  "Indonesia",
+  "Belgium",
   "Australia",
   "India",
-  "Namibia",
+  "Sweden",
   "France",
   "Italy",
-  "Chile",
+  "Finland",
 ];
 
 export function getContext( {name} ) {

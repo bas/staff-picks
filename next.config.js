@@ -10,6 +10,7 @@ const nextConfig = {
     assetPrefix: isProd ? process.env.REPO_NAME : "",
     clientSideID: process.env.LAUNCHDARKLY_CLIENT_ID,
   },
+  output: 'standalone',
 }
 
 module.exports = nextConfig;

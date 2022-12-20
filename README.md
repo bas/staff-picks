@@ -18,3 +18,36 @@ For LaunchDarkly to work you need to add a `.env` file with the following:
 ```
 LAUNCHDARKLY_CLIENT_ID=<Your Client ID>
 ```
+
+## Docker
+
+To run in Docker, first build the image:
+
+```
+docker build -t staff-picks .  
+```
+
+Then run the image using the following command:
+
+```
+docker run --name staff-picks -p 3000:3000 staff-picks
+```
+
+To stop the container:
+
+```
+docker stop staff-picks
+```
+
+To remove the container:
+
+```
+docker rm staff-picks
+```
+
+To remove the image:
+
+```
+docker rmi staff-picks
+```
+

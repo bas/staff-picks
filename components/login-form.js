@@ -75,6 +75,7 @@ function LoginForm() {
         <IconButton
           aria-label="Profile"
           icon={PersonIcon}
+          disabled={identity ? false : true}
           onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
           sx={{ marginLeft: ".5rem" }}
         />

@@ -53,7 +53,5 @@ export function getContext({ name }) {
     },
   };
 
-  console.log(userContext);
-
   return userContext;
 }

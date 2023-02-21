@@ -1,11 +1,11 @@
 import { StyledOcticon, Flash, Box } from "@primer/react";
-import { AlertIcon } from "@primer/octicons-react";
+import { BookIcon } from "@primer/octicons-react";
 
 function Banner({ bannerText }) {
   return (
-    <Box padding={2}>
-      <Flash variant="warning">
-        <StyledOcticon icon={AlertIcon} size={24} />
+    <Box padding={2} sx={{ fontWeight: "bold"}}>
+      <Flash>
+        <StyledOcticon icon={BookIcon} size={24} />
         {bannerText}
       </Flash>
     </Box>

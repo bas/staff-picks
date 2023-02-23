@@ -239,6 +239,35 @@ resource "launchdarkly_feature_flag" "enable-api" {
   ]
 }
 
+resource "launchdarkly_feature_flag" "configure_banner" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "configure-banner"
+  name        = "Configure Banner"
+  description = "This flags configures the banner variant and text"
+
+  variation_type = "json"
+  variations {
+    name  = "Free shipping]"
+    value = jsonencode({ "variant": "success", "text": "As a premium customer you get unlimited free shipping!" })
+  }
+  variations {
+    name  = "10% discount"
+    value = jsonencode({ "variant": "warning", "text": "As a premium customer you get 10% discount on checkout!" })
+  }
+    variations {
+    name  = "3 for 2"
+    value = jsonencode({ "variant": "default", "text":"As a premium customer you get 3 for the price of 2!" })
+  }
+  defaults {
+    on_variation = 1
+    off_variation = 0
+  }
+
+  tags = [
+    "terraform",   
+  ]
+}
+
 resource "launchdarkly_metric" "add_to_cart" {
   project_key      = launchdarkly_project.terraform.key
   key              = "add-to-cart"

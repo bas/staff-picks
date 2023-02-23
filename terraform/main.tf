@@ -53,7 +53,7 @@ resource "launchdarkly_project" "terraform" {
 resource "launchdarkly_feature_flag" "show_login" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-login"
-  name        = "Show login Form"
+  name        = "Show login form"
   description = "This flag controls the login form in the page header"
 
   variation_type = "boolean"
@@ -148,7 +148,7 @@ resource "launchdarkly_feature_flag" "show_buy_now_button" {
 resource "launchdarkly_feature_flag" "show_banner" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-banner"
-  name        = "Show Banner"
+  name        = "Show banner"
   description = "This flag controls the visibility of the campaign banner"
 
   variation_type = "boolean"
@@ -176,7 +176,7 @@ resource "launchdarkly_feature_flag" "show_banner" {
 resource "launchdarkly_feature_flag" "control_background_color" {
   project_key = launchdarkly_project.terraform.key
   key         = "control-background-color"
-  name        = "Control Background Color"
+  name        = "Control background color"
   description = "This flag controls the background color of the navigation bar"
 
   variation_type = "string"
@@ -242,8 +242,8 @@ resource "launchdarkly_feature_flag" "enable-api" {
 resource "launchdarkly_feature_flag" "configure_banner" {
   project_key = launchdarkly_project.terraform.key
   key         = "configure-banner"
-  name        = "Configure Banner"
-  description = "This flags configures the banner variant and text"
+  name        = "Configure banner"
+  description = "This flags configures the banner style and text"
 
   variation_type = "json"
   variations {

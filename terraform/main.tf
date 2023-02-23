@@ -293,3 +293,16 @@ resource "launchdarkly_metric" "buy_now" {
   success_criteria = "HigherThanBaseline"
   tags             = ["terraform"]
 }
+
+resource "launchdarkly_metric" "premium-sales" {
+  project_key      = launchdarkly_project.terraform.key
+  key              = "premium-sales"
+  name             = "Premium sales"
+  description      = "Custom event to track items bought by premium customers"
+  kind             = "custom"
+  event_key        = "premium-sales" 
+  is_numeric       = true
+  unit             = "qty"
+  success_criteria = "HigherThanBaseline"
+  tags             = ["terraform"]
+}

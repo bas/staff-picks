@@ -53,7 +53,7 @@ export default function App() {
     <div className="App">
       <BaseStyles>
         <PageHead />
-        <PageLayout padding="0px">
+        <PageLayout padding="none">
           <PageLayout.Header>
             <NavigationBar />
             <PageHeading headingText="Staff picks"/>

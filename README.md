@@ -51,3 +51,4 @@ To remove the image:
 docker rmi staff-picks
 ```
 
+Check the [Terraform module](terraform/main.tf) for the flags used in this project.

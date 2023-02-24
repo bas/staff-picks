@@ -1,12 +1,16 @@
 import { StyledOcticon, Flash, Box } from "@primer/react";
-import { AlertIcon } from "@primer/octicons-react";
+import { PinIcon } from "@primer/octicons-react";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
-function Banner({ bannerText }) {
+function Banner() {
+
+  const { configureBanner } = useFlags();
+
   return (
-    <Box padding={2}>
-      <Flash variant="warning">
-        <StyledOcticon icon={AlertIcon} size={24} />
-        {bannerText}
+    <Box padding={2} sx={{ fontWeight: "bold"}}>
+      <Flash variant={configureBanner.variant}>
+        <StyledOcticon icon={PinIcon} size={24} />
+        {configureBanner.text}
       </Flash>
     </Box>
   );

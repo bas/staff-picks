@@ -60,7 +60,7 @@ export default function App() {
           </PageLayout.Header>
           <PageLayout.Content>
             {showBanner && (
-              <Banner bannerText="As a premium customer you get 10% discount on checkout!" />
+              <Banner />
             )}
             <Box>
               <BookList allBooks={allBooks} />

@@ -53,7 +53,7 @@ resource "launchdarkly_project" "terraform" {
 resource "launchdarkly_feature_flag" "show_login" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-login"
-  name        = "Show login Form"
+  name        = "Show login form"
   description = "This flag controls the login form in the page header"
 
   variation_type = "boolean"
@@ -148,7 +148,7 @@ resource "launchdarkly_feature_flag" "show_buy_now_button" {
 resource "launchdarkly_feature_flag" "show_banner" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-banner"
-  name        = "Show Banner"
+  name        = "Show banner"
   description = "This flag controls the visibility of the campaign banner"
 
   variation_type = "boolean"
@@ -176,7 +176,7 @@ resource "launchdarkly_feature_flag" "show_banner" {
 resource "launchdarkly_feature_flag" "control_background_color" {
   project_key = launchdarkly_project.terraform.key
   key         = "control-background-color"
-  name        = "Control Background Color"
+  name        = "Control background color"
   description = "This flag controls the background color of the navigation bar"
 
   variation_type = "string"
@@ -239,6 +239,35 @@ resource "launchdarkly_feature_flag" "enable-api" {
   ]
 }
 
+resource "launchdarkly_feature_flag" "configure_banner" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "configure-banner"
+  name        = "Configure banner"
+  description = "This flags configures the banner style and text"
+
+  variation_type = "json"
+  variations {
+    name  = "Free shipping]"
+    value = jsonencode({ "variant": "success", "text": "As a premium customer you get unlimited free shipping!" })
+  }
+  variations {
+    name  = "10% discount"
+    value = jsonencode({ "variant": "warning", "text": "As a premium customer you get 10% discount on checkout!" })
+  }
+    variations {
+    name  = "3 for 2"
+    value = jsonencode({ "variant": "default", "text":"As a premium customer you get 3 for the price of 2!" })
+  }
+  defaults {
+    on_variation = 1
+    off_variation = 0
+  }
+
+  tags = [
+    "terraform",   
+  ]
+}
+
 resource "launchdarkly_metric" "add_to_cart" {
   project_key      = launchdarkly_project.terraform.key
   key              = "add-to-cart"
@@ -259,6 +288,19 @@ resource "launchdarkly_metric" "buy_now" {
   description      = "Custom event when a user clicks the buy now button"
   kind             = "custom"
   event_key        = "buy-now" 
+  is_numeric       = true
+  unit             = "qty"
+  success_criteria = "HigherThanBaseline"
+  tags             = ["terraform"]
+}
+
+resource "launchdarkly_metric" "premium-sales" {
+  project_key      = launchdarkly_project.terraform.key
+  key              = "premium-sales"
+  name             = "Premium sales"
+  description      = "Custom event to track items bought by premium customers"
+  kind             = "custom"
+  event_key        = "premium-sales" 
   is_numeric       = true
   unit             = "qty"
   success_criteria = "HigherThanBaseline"

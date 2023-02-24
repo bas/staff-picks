@@ -40,6 +40,7 @@ export function getContext({ name }) {
   const email = randomName.toLowerCase() + "@example.com";
 
   let userContext = {
+    kind: "user",
     key: email,
     email: email,
     name: randomName,
@@ -51,6 +52,9 @@ export function getContext({ name }) {
       operatingSystem: osName,
       groups: groups[Math.floor(Math.random() * 4)],
     },
+    _meta: {
+      privateAttributes: ['country']
+    }
   };
 
   return userContext;

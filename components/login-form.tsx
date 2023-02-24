@@ -13,15 +13,15 @@ import { useState, useEffect } from "react";
 import { getContext } from "../utils/loginHelper";
 
 function LoginForm() {
-  const [identity, setIdentity] = useState();
-  const [isOpen, setOpen] = useState(false);
-  const [name, setName] = useState("");
+  const [identity, setIdentity] = useState<any>();
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
   const ldClient = useLDClient();
 
   useEffect(() => {}, [isOpen]);
 
   async function onSignOut() {
-    setIdentity();
+    setIdentity(null);
 
     if (ldClient) {
       ldClient.identify({ key: "anon", anonymous: true });

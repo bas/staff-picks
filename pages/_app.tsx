@@ -1,13 +1,14 @@
 import { ThemeProvider } from "@primer/react";
+import { AppProps } from "next/app";
 import { withLDProvider } from "launchdarkly-react-client-sdk";
 
-const App = ({ Component, pageProps }) => {
+function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <Component {...pageProps} />
     </ThemeProvider>
   );
-};
+}
 
 export default withLDProvider({
   clientSideID: process.env.clientSideID,

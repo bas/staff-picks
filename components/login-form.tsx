@@ -10,7 +10,7 @@ import {
 import { PersonIcon, MailIcon, SignOutIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
-import { getContext } from "../utils/loginHelper";
+import { CustomMultiContext, getContext } from "../utils/loginHelper";
 
 function LoginForm() {
   const [identity, setIdentity] = useState<any>();
@@ -31,7 +31,7 @@ function LoginForm() {
   }
 
   async function onSignIn() {
-    const newUser = getContext({ name: name });
+    const newUser: CustomMultiContext = getContext({ name: name });
 
     setIdentity(newUser);
 

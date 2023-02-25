@@ -2,6 +2,25 @@ import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
 import { LDMultiKindContext, LDSingleKindContext } from "launchdarkly-js-client-sdk";
 
+export interface CustomContext extends LDSingleKindContext {
+  device?: string;
+  operatingSystem?: string;
+  email?: string;
+  name?: string;
+  country?: string;
+  premium?: boolean;
+  staff?: boolean;
+  groups?: string[];
+  _meta?: {
+    privateAttributes: string[];
+  };
+}
+
+export interface CustomMultiContext extends LDMultiKindContext {
+  user: CustomContext,
+  device: CustomContext
+}
+
 const countries = [
   "United States",
   "Singapore",
@@ -45,14 +64,14 @@ export function getContext({ name }) {
 
   const email = randomName.toLowerCase() + '@example.com';
 
-  const deviceContext: LDSingleKindContext =  {
+  const deviceContext: CustomContext =  {
     kind: 'device',
     key: deviceType,
     device: deviceType,
     operatingSystem: osName,
   };
   
-  const userContext: LDSingleKindContext = {
+  const userContext: CustomContext = {
     kind: 'user',
     key: hashCode(email),
     email: email,
@@ -66,7 +85,7 @@ export function getContext({ name }) {
     },
   };
 
-  const multiContext: LDMultiKindContext = {
+  const multiContext: CustomMultiContext = {
     kind: 'multi',
     user: userContext,
     device: deviceContext

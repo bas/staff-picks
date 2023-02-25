@@ -1,6 +1,6 @@
 import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
-import { CustomContext } from "../types/custom-context";
+import { CustomContext, CustomMultiContext } from "../types/custom-context";
 
 const countries = [
   "United States",

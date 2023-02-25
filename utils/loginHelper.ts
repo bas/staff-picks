@@ -1,25 +1,6 @@
 import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
-import { LDMultiKindContext, LDSingleKindContext } from "launchdarkly-js-client-sdk";
-
-export interface CustomContext extends LDSingleKindContext {
-  device?: string;
-  operatingSystem?: string;
-  email?: string;
-  name?: string;
-  country?: string;
-  premium?: boolean;
-  staff?: boolean;
-  groups?: string[];
-  _meta?: {
-    privateAttributes: string[];
-  };
-}
-
-export interface CustomMultiContext extends LDMultiKindContext {
-  user: CustomContext,
-  device: CustomContext
-}
+import { CustomContext } from "../types/custom-context";
 
 const countries = [
   "United States",

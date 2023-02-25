@@ -62,7 +62,7 @@ export function getContext({ name }) {
     staff: Math.random() < 0.5,
     groups: groups[Math.floor(Math.random() * 4)],
     _meta: {
-      privateAttributes: ["country"],
+      privateAttributes: ["email"],
     },
   };
 

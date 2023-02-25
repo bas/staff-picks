@@ -11,6 +11,7 @@ import { PersonIcon, MailIcon, SignOutIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
 import { getContext } from "../utils/loginHelper";
+import { CustomMultiContext } from "../types/custom-context";
 
 function LoginForm() {
   const [identity, setIdentity] = useState<any>();
@@ -31,7 +32,7 @@ function LoginForm() {
   }
 
   async function onSignIn() {
-    const newUser = getContext({ name: name });
+    const newUser: CustomMultiContext = getContext({ name: name });
 
     setIdentity(newUser);
 
@@ -43,7 +44,7 @@ function LoginForm() {
         console.log(userFlags);
       });
 
-      setName(newUser.name);
+      setName(newUser.user.name);
     }
   }
 
@@ -85,19 +86,19 @@ function LoginForm() {
               <Popover.Content>
                 <Heading sx={{ fontSize: 2 }}>Profile</Heading>
                 <Text as="p" sx={{ whiteSpace: 'nowrap' }}>
-                  <MailIcon size={16} /> {identity.email}
+                  <MailIcon size={16} /> {identity.user.email}
                 </Text>
-                <Text as="p">Name: {identity.name}</Text>
-                <Text as="p">Country: {identity.country}</Text>
+                <Text as="p">Name: {identity.user.name}</Text>
+                <Text as="p">Country: {identity.user.country}</Text>
                 <Text as="p">
-                  Premium: {identity.custom.premium ? "Yes" : "No"}
+                  Premium: {identity.user.premium ? "Yes" : "No"}
                 </Text>
                 <Text as="p">
-                  Staff: {identity.custom.staff ? "Yes" : "No"}
+                  Staff: {identity.user.staff ? "Yes" : "No"}
                 </Text>
-                <Text as="p">Groups: {identity.custom.groups.toString()}</Text>
-                <Text as="p">Device: {identity.custom.device}</Text>
-                <Text as="p">OS: {identity.custom.operatingSystem}</Text>
+                <Text as="p">Groups: {identity.user.groups.toString()}</Text>
+                <Text as="p">Device: {identity.device.device}</Text>
+                <Text as="p">OS: {identity.device.operatingSystem}</Text>
                 <Box display="flex">
                   <Button
                     variant="primary"

@@ -12,10 +12,9 @@ function App({ Component, pageProps }: AppProps) {
 
 export default withLDProvider({
   clientSideID: process.env.clientSideID,
-  user: { key: "anon", anonymous: true },
+  context: { kind: 'user', key: 'anon', anonymous: true },
   options: {
-    bootstrap: "localStorage",
-    privateAttributeNames: ["country"],
+    bootstrap: 'localStorage'
   },
   reactOptions: {
     useCamelCaseFlagKeys: true,

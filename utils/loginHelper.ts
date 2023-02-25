@@ -1,5 +1,6 @@
 import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
+import { CustomContext, CustomMultiContext } from "../types/custom-context";
 
 const countries = [
   "United States",
@@ -19,12 +20,17 @@ const countries = [
   "Portugal",
 ];
 
-const groups = [
-  ["alpha","beta"],
-  ["alpha"],
-  ["beta"],
-  ["none"]
-]
+const groups = [["alpha", "beta"], ["alpha"], ["beta"], ["none"]];
+
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0, len = str.length; i < len; i++) {
+      let chr = str.charCodeAt(i);
+      hash = (hash << 5) - hash + chr;
+      hash |= 0; // Convert to 32bit integer
+  }
+  return '' + hash;
+}
 
 export function getContext({ name }) {
   const randomCountry = uniqueNamesGenerator({
@@ -37,21 +43,34 @@ export function getContext({ name }) {
 
   if (name.length > 2) randomName = name;
 
-  const email = randomName.toLowerCase() + "@example.com";
+  const email = randomName.toLowerCase() + '@example.com';
 
-  let userContext = {
-    key: email,
+  const deviceContext: CustomContext =  {
+    kind: 'device',
+    key: deviceType,
+    device: deviceType,
+    operatingSystem: osName,
+  };
+  
+  const userContext: CustomContext = {
+    kind: 'user',
+    key: hashCode(email),
     email: email,
     name: randomName,
     country: randomCountry,
-    custom: {
-      premium: Math.random() < 0.5,
-      staff: Math.random() < 0.5,
-      device: deviceType,
-      operatingSystem: osName,
-      groups: groups[Math.floor(Math.random() * 4)],
+    premium: Math.random() < 0.5,
+    staff: Math.random() < 0.5,
+    groups: groups[Math.floor(Math.random() * 4)],
+    _meta: {
+      privateAttributes: ["email"],
     },
   };
 
-  return userContext;
+  const multiContext: CustomMultiContext = {
+    kind: 'multi',
+    user: userContext,
+    device: deviceContext
+  }
+
+  return multiContext;
 }

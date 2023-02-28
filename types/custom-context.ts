@@ -3,21 +3,26 @@ import {
   LDSingleKindContext,
 } from "launchdarkly-js-client-sdk";
 
-export interface CustomContext extends LDSingleKindContext {
-  device?: string;
-  operatingSystem?: string;
+export interface UserContext extends LDSingleKindContext {
   email?: string;
   name?: string;
   country?: string;
-  premium?: boolean;
-  staff?: boolean;
-  groups?: string[];
-  _meta?: {
-    privateAttributes: string[],
-  };
+}
+
+export interface AccountContext extends LDSingleKindContext {
+  isPremium?: boolean;
+  isStaff?: boolean;
+  isBeta?: boolean;
+  categories?: string[];
+}
+
+export interface DeviceContext extends LDSingleKindContext {
+  device?: string;
+  operatingSystem?: string;
 }
 
 export interface CustomMultiContext extends LDMultiKindContext {
-  user: CustomContext;
-  device: CustomContext;
+  user: UserContext;
+  account: AccountContext
+  device: DeviceContext;
 }

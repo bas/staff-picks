@@ -78,45 +78,6 @@ resource "launchdarkly_feature_flag" "show_login" {
   ]
 }
 
-resource "launchdarkly_feature_flag" "show_book_rating" {
-  project_key = launchdarkly_project.terraform.key
-  key         = "show-book-rating"
-  name        = "Show book rating"
-  description = "This flag controls the visibility of the book ratings"
-
-  variation_type = "boolean"
-  variations {
-    value       = "true"
-    name        = "Show book rating"
-    description = "Show the book rating"
-  }
-  variations {
-    value       = "false"
-    name        = "Hide book rating"
-    description = "Hide the book rating"
-  }
-  
-  defaults {
-    on_variation = 0
-    off_variation = 1
-  }
-
-  tags = [
-    "terraform",   
-  ]
-}
-
-resource "launchdarkly_flag_trigger" "show_book_rating_trigger" {
-    project_key = launchdarkly_project.terraform.key
-    env_key = launchdarkly_project.terraform.environments[0].key
-    flag_key = launchdarkly_feature_flag.show_book_rating.key
-    integration_key = "generic-trigger"
-    instructions {
-        kind = "turnFlagOff"
-    }
-    enabled = false
-}
-
 resource "launchdarkly_feature_flag" "show_buy_now_button" {
   project_key = launchdarkly_project.terraform.key
   key         = "show-buy-now-button"
@@ -266,6 +227,45 @@ resource "launchdarkly_feature_flag" "configure_banner" {
   tags = [
     "terraform",   
   ]
+}
+
+resource "launchdarkly_feature_flag" "show_book_rating" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "show-book-rating"
+  name        = "Show book rating"
+  description = "This flag controls the visibility of the book ratings"
+
+  variation_type = "boolean"
+  variations {
+    value       = "true"
+    name        = "Show book rating"
+    description = "Show the book rating"
+  }
+  variations {
+    value       = "false"
+    name        = "Hide book rating"
+    description = "Hide the book rating"
+  }
+  
+  defaults {
+    on_variation = 0
+    off_variation = 1
+  }
+
+  tags = [
+    "terraform",   
+  ]
+}
+
+resource "launchdarkly_flag_trigger" "show_book_rating_trigger" {
+    project_key = launchdarkly_project.terraform.key
+    env_key = launchdarkly_project.terraform.environments[0].key
+    flag_key = launchdarkly_feature_flag.show_book_rating.key
+    integration_key = "generic-trigger"
+    instructions {
+        kind = "turnFlagOff"
+    }
+    enabled = false
 }
 
 resource "launchdarkly_metric" "add_to_cart" {

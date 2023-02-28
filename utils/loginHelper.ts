@@ -1,6 +1,25 @@
 import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
-import { CustomContext, CustomMultiContext } from "../types/custom-context";
+import {
+  DeviceContext,
+  AccountContext,
+  UserContext,
+  CustomMultiContext,
+} from "../types/custom-context";
+
+const categories = [
+  "Arts",
+  "Biographies",
+  "Finance",
+  "Comics",
+  "Computers",
+  "History",
+  "Law",
+  "Fiction",
+  "Sports",
+  "Fantasy",
+  "Travel",
+];
 
 const countries = [
   "United States",
@@ -20,8 +39,6 @@ const countries = [
   "Portugal",
 ];
 
-const groups = [["alpha", "beta"], ["alpha"], ["beta"], ["none"]];
-
 export function hashCode(str: String) {
   var hash = 0,
     i = 0,
@@ -39,7 +56,7 @@ function pad(num, size) {
   return num;
 }
 
-export function getContext( {name} ) {
+export function getContext({ name }) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
   });
@@ -52,31 +69,42 @@ export function getContext( {name} ) {
 
   const email = randomName.toLowerCase() + "@example.com";
 
-  const deviceContext: CustomContext = {
+  const categoryList = categories
+    .sort(() => 0.5 - Math.random())
+    .slice(0, Math.floor(Math.random() * 4) + 1);
+
+  const deviceContext: DeviceContext = {
     kind: "device",
-    key: deviceType,
+    key: hashCode(deviceType),
     device: deviceType,
     operatingSystem: osName,
   };
 
-  const userContext: CustomContext = {
+  const userContext: UserContext = {
     kind: "user",
     key: hashCode(email),
     email: email,
     name: randomName,
     country: randomCountry,
-    premium: Math.random() < 0.5,
-    staff: Math.random() < 0.5,
-    groups: groups[Math.floor(Math.random() * 4)],
     _meta: {
       privateAttributes: ["email"],
     },
+  };
+
+  const accountContext: AccountContext = {
+    kind: "account",
+    key: hashCode("account"),
+    isPremium: Math.random() < 0.5,
+    isStaff: Math.random() < 0.5,
+    isBeta: Math.random() < 0.5,
+    categories: categoryList
   };
 
   const multiContext: CustomMultiContext = {
     kind: "multi",
     user: userContext,
     device: deviceContext,
+    account: accountContext,
   };
 
   return multiContext;

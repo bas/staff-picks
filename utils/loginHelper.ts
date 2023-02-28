@@ -22,17 +22,17 @@ const countries = [
 
 const groups = [["alpha", "beta"], ["alpha"], ["beta"], ["none"]];
 
-function hashCode(str) {
-  let hash = 0;
-  for (let i = 0, len = str.length; i < len; i++) {
-      let chr = str.charCodeAt(i);
-      hash = (hash << 5) - hash + chr;
-      hash |= 0; // Convert to 32bit integer
+export function hashCode(str: String) {
+  var hash = 0,
+    i = 0,
+    len = str.length;
+  while (i < len) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i++)) << 0;
   }
-  return '' + hash;
+  return "key_" + (hash + 2147483647 + 1);
 }
 
-export function getContext({ name }) {
+export function getContext(name: String) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
   });
@@ -43,17 +43,17 @@ export function getContext({ name }) {
 
   if (name.length > 2) randomName = name;
 
-  const email = randomName.toLowerCase() + '@example.com';
+  const email = randomName.toLowerCase() + "@example.com";
 
-  const deviceContext: CustomContext =  {
-    kind: 'device',
+  const deviceContext: CustomContext = {
+    kind: "device",
     key: deviceType,
     device: deviceType,
     operatingSystem: osName,
   };
-  
+
   const userContext: CustomContext = {
-    kind: 'user',
+    kind: "user",
     key: hashCode(email),
     email: email,
     name: randomName,
@@ -67,10 +67,10 @@ export function getContext({ name }) {
   };
 
   const multiContext: CustomMultiContext = {
-    kind: 'multi',
+    kind: "multi",
     user: userContext,
-    device: deviceContext
-  }
+    device: deviceContext,
+  };
 
   return multiContext;
 }

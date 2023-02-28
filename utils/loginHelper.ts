@@ -29,7 +29,14 @@ export function hashCode(str: String) {
   while (i < len) {
     hash = ((hash << 5) - hash + str.charCodeAt(i++)) << 0;
   }
-  return "key_" + (hash + 2147483647 + 1);
+  const key = pad(hash + 2147483647 + 1, 12);
+  return "key_" + key;
+}
+
+function pad(num, size) {
+  num = num.toString();
+  while (num.length < size) num = "0" + num;
+  return num;
 }
 
 export function getContext( {name} ) {

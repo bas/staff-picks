@@ -22,8 +22,8 @@ export default function About() {
               <Image
                 src={`${process.env.assetPrefix}/images/qrcode.png`}
                 alt="QR Code"
-                height={60}
-                width={60}
+                height={120}
+                width={120}
               />
             </Box>
           </PageLayout.Content>

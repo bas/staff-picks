@@ -32,7 +32,7 @@ export function hashCode(str: String) {
   return "key_" + (hash + 2147483647 + 1);
 }
 
-export function getContext(name: String) {
+export function getContext( {name} ) {
   const randomCountry = uniqueNamesGenerator({
     dictionaries: [countries],
   });

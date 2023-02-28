@@ -268,6 +268,7 @@ resource "launchdarkly_flag_trigger" "show_book_rating_trigger" {
     enabled = false
 }
 
+/*
 resource "launchdarkly_metric" "add_to_cart" {
   project_key      = launchdarkly_project.terraform.key
   key              = "add-to-cart"
@@ -306,3 +307,4 @@ resource "launchdarkly_metric" "premium-sales" {
   success_criteria = "HigherThanBaseline"
   tags             = ["terraform"]
 }
+*/

@@ -208,7 +208,7 @@ resource "launchdarkly_feature_flag" "configure_banner" {
 
   variation_type = "json"
   variations {
-    name  = "Free shipping]"
+    name  = "Free shipping"
     value = jsonencode({ "variant": "success", "text": "As a premium customer you get unlimited free shipping!" })
   }
   variations {

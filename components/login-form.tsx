@@ -91,7 +91,7 @@ function LoginForm() {
                 <Text as="p">Name: {identity.user.name}</Text>
                 <Text as="p">Country: {identity.user.country}</Text>
                 <Text as="p">
-                  Premium: {identity.account.isPremuim ? "Yes" : "No"}
+                  Premium: {identity.account.isPremium ? "Yes" : "No"}
                 </Text>
                 <Text as="p">
                   Staff: {identity.account.isStaff ? "Yes" : "No"}

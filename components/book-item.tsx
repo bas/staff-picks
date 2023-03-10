@@ -47,7 +47,7 @@ function BookItem({ book }) {
           <Text sx={{ fontSize: 1 }}>&euro;{book.price}</Text>
         </Box>
         {/* if showBookRating returns true show the book rating */}
-        {showBookRating && <BookRating stars={book.rating} />}
+        {showBookRating && <BookRating stars={book.rating} ratingCount={book.ratingCount} />}
         {/* End of showBookRating block */}
       </Box>
       <Box>

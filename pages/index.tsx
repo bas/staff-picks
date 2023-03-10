@@ -17,6 +17,7 @@ export default function App() {
       cover: "/images/accelerate.jpg",
       price: "17.99",
       rating: 5,
+      ratingCount: 986,
     },
     {
       title: "Scrum: The Art of Doing Twice the Work in Half the Time",
@@ -24,6 +25,7 @@ export default function App() {
       cover: "/images/scrum.jpg",
       price: "15.00",
       rating: 3,
+      ratingCount: 756,
     },
     {
       title: "The Lean Startup",
@@ -31,6 +33,7 @@ export default function App() {
       cover: "/images/lean.jpg",
       price: "12.99",
       rating: 4,
+      ratingCount: 657,
     },
     {
       title: "The DevOps Handbook",
@@ -38,6 +41,7 @@ export default function App() {
       cover: "/images/devops.jpg",
       price: "29.10",
       rating: 5,
+      ratingCount: 124,
     },
     {
       title:
@@ -46,6 +50,7 @@ export default function App() {
       cover: "/images/think.jpg",
       price: "10.99",
       rating: 4,
+      ratingCount: 465,
     },
   ];
 

@@ -1,7 +1,7 @@
 import { Box, Text } from "@primer/react";
 import { StarFillIcon } from "@primer/octicons-react";
 
-function BookRating({ stars }) {
+function BookRating({ stars, ratingCount }) {
   return (
     <Box>
       <Text as="span" sx={{ fontSize: 1 }}>
@@ -15,7 +15,7 @@ function BookRating({ stars }) {
           <StarFillIcon key={i} size={16} fill="#E5E4E2" />
         ))}
       </Text>
-      <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>({Math.floor(Math.random() * 1000)} ratings)</Text>
+      <Text as="span" sx={{ fontSize: 1, marginLeft: ".5rem" }}>({ratingCount} ratings)</Text>
     </Box>
   );
 }

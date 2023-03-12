@@ -134,44 +134,6 @@ resource "launchdarkly_feature_flag" "show_banner" {
   ]
 }
 
-resource "launchdarkly_feature_flag" "control_background_color" {
-  project_key = launchdarkly_project.terraform.key
-  key         = "control-background-color"
-  name        = "Control background color"
-  description = "This flag controls the background color of the navigation bar"
-
-  variation_type = "string"
-  variations {
-    value       = "#D0417E"
-    name        = "Magenta background"
-    description = "Shhow the magenta background"
-  }
-  variations {
-    value       = "#000000"
-    name        = "Black background"
-    description = "Show the black background"
-  }
-  variations {
-    value       = "#58595B"
-    name        = "Gray background"
-    description = "Show the gray background"
-  }
-  variations {
-    value       = "#405BFF"
-    name        = "Blue background"
-    description = "Show the blue background"
-  }
-
-  defaults {
-    on_variation = 0
-    off_variation = 1
-  }
-
-  tags = [
-    "terraform",   
-  ]
-}
-
 resource "launchdarkly_feature_flag" "enable-api" {
   project_key = launchdarkly_project.terraform.key
   key         = "enable-api"

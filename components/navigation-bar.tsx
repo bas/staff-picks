@@ -5,15 +5,13 @@ import logoPic from "../public/images/logo.png";
 import LoginForm from "./login-form";
 
 function NavigationBar() {
-  const { showLogin, controlBackgroundColor } = useFlags();
+  const { showLogin } = useFlags();
 
   return (
     <Header
       sx={{
         paddingRight: "0px",
-        backgroundColor: `${
-          controlBackgroundColor ? controlBackgroundColor : "#000000"
-        }`,
+        backgroundColor: "#000000",
       }}
     >
       <Header.Item>

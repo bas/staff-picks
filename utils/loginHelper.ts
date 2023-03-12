@@ -1,11 +1,6 @@
 import { deviceType, osName } from "react-device-detect";
 import { uniqueNamesGenerator, names } from "unique-names-generator";
-import {
-  DeviceContext,
-  AccountContext,
-  UserContext,
-  CustomMultiContext,
-} from "../types/custom-context";
+import { UserContext } from "../types/custom-context";
 
 const categories = [
   "Arts",
@@ -73,39 +68,22 @@ export function getContext({ name }) {
     .sort(() => 0.5 - Math.random())
     .slice(0, Math.floor(Math.random() * 4) + 1);
 
-  const deviceContext: DeviceContext = {
-    kind: "device",
-    key: hashCode(deviceType),
-    device: deviceType,
-    operatingSystem: osName,
-  };
-
   const userContext: UserContext = {
     kind: "user",
     key: hashCode(email),
     email: email,
     name: randomName,
     country: randomCountry,
+    isPremium: Math.random() < 0.5,
+    isStaff: Math.random() < 0.5,
+    isBeta: Math.random() < 0.5,
+    categories: categoryList,
+    device: deviceType,
+    operatingSystem: osName,
     _meta: {
       privateAttributes: ["email"],
     },
   };
 
-  const accountContext: AccountContext = {
-    kind: "account",
-    key: hashCode("account"),
-    isPremium: Math.random() < 0.5,
-    isStaff: Math.random() < 0.5,
-    isBeta: Math.random() < 0.5,
-    categories: categoryList
-  };
-
-  const multiContext: CustomMultiContext = {
-    kind: "multi",
-    user: userContext,
-    device: deviceContext,
-    account: accountContext,
-  };
-
-  return multiContext;
+  return userContext;
 }

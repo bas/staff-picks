@@ -11,7 +11,7 @@ import { PersonIcon, MailIcon, SignOutIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
 import { getContext } from "../utils/loginHelper";
-import { CustomMultiContext } from "../types/custom-context";
+import { UserContext } from "../types/custom-context";
 
 function LoginForm() {
   const [identity, setIdentity] = useState<any>();
@@ -32,7 +32,7 @@ function LoginForm() {
   }
 
   async function onSignIn() {
-    const newUser: CustomMultiContext = getContext({ name: name });
+    const newUser: UserContext = getContext({ name: name });
 
     setIdentity(newUser);
 
@@ -44,7 +44,7 @@ function LoginForm() {
         console.log(userFlags);
       });
 
-      setName(newUser.user.name);
+      setName(newUser.name);
     }
   }
 
@@ -86,22 +86,22 @@ function LoginForm() {
               <Popover.Content>
                 <Heading sx={{ fontSize: 2 }}>Profile</Heading>
                 <Text as="p" sx={{ whiteSpace: 'nowrap'}}>
-                  <MailIcon size={16} /> {identity.user.email}
+                  <MailIcon size={16} /> {identity.email}
                 </Text>
-                <Text as="p">Name: {identity.user.name}</Text>
-                <Text as="p">Country: {identity.user.country}</Text>
+                <Text as="p">Name: {identity.name}</Text>
+                <Text as="p">Country: {identity.country}</Text>
                 <Text as="p">
-                  Premium: {identity.account.isPremium ? "Yes" : "No"}
-                </Text>
-                <Text as="p">
-                  Staff: {identity.account.isStaff ? "Yes" : "No"}
+                  Premium: {identity.isPremium ? "Yes" : "No"}
                 </Text>
                 <Text as="p">
-                  Beta: {identity.account.isBeta ? "Yes" : "No"}
+                  Staff: {identity.isStaff ? "Yes" : "No"}
                 </Text>
-                <Text as="p">Categories: {identity.account.categories.join(', ')}</Text>
-                <Text as="p">Device: {identity.device.device}</Text>
-                <Text as="p">OS: {identity.device.operatingSystem}</Text>
+                <Text as="p">
+                  Beta: {identity.isBeta ? "Yes" : "No"}
+                </Text>
+                <Text as="p">Categories: {identity.categories.join(', ')}</Text>
+                <Text as="p">Device: {identity.device}</Text>
+                <Text as="p">OS: {identity.operatingSystem}</Text>
                 <Box display="flex">
                   <Button
                     variant="primary"

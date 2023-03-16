@@ -8,6 +8,12 @@ import Link from "next/link";
 function NavigationBar() {
   const { showLogin } = useFlags();
 
+  const linkStyle = {
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    textDecoration: "none",
+  };
+
   return (
     <Header
       sx={{
@@ -19,12 +25,14 @@ function NavigationBar() {
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Header.Link as={Link} href={`${process.env.assetPrefix}/`}>Home</Header.Link>
+        <Link style={linkStyle} href={`${process.env.assetPrefix}/`}>
+          Home
+        </Link>
       </Header.Item>
       <Header.Item full>
-        <Header.Link as={Link} href={`${process.env.assetPrefix}/about`}>
+        <Link style={linkStyle} href={`${process.env.assetPrefix}/about`}>
           About
-        </Header.Link>
+        </Link>
       </Header.Item>
       {showLogin && (
         <Header.Item>

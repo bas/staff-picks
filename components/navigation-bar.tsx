@@ -25,12 +25,12 @@ function NavigationBar() {
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Link style={linkStyle} href={`${process.env.assetPrefix}/`}>
+        <Link style={linkStyle} href="/">
           Home
         </Link>
       </Header.Item>
       <Header.Item full>
-        <Link style={linkStyle} href={`${process.env.assetPrefix}/about`}>
+        <Link style={linkStyle} href="/about">
           About
         </Link>
       </Header.Item>

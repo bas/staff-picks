@@ -4,15 +4,10 @@ import Image from "next/image";
 import logoPic from "../public/images/logo.png";
 import LoginForm from "./login-form";
 import Link from "next/link";
+import styles from "./NavigationBar.module.css"
 
 function NavigationBar() {
   const { showLogin } = useFlags();
-
-  const linkStyle = {
-    color: "#FFFFFF",
-    fontWeight: "bold",
-    textDecoration: "none",
-  };
 
   return (
     <Header
@@ -25,12 +20,12 @@ function NavigationBar() {
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Link style={linkStyle} href="/">
+        <Link className={styles.link} href="/">
           Home
         </Link>
       </Header.Item>
       <Header.Item full>
-        <Link style={linkStyle} href="/about">
+        <Link className={styles.link} href="/about">
           About
         </Link>
       </Header.Item>

@@ -1,16 +1,28 @@
-import { ThemeProvider, BaseStyles, PageLayout } from "@primer/react";
-import Footer from "../components/footer";
-import PageHead from "../components/page-head";
-import NavigationBar from "../components/navigation-bar";
+import {
+  ThemeProvider,
+  BaseStyles,
+  PageLayout,
+  Box,
+  Text,
+} from "@primer/react";
+import Head from "next/head";
 import { AppProps } from "next/app";
 import { withLDProvider } from "launchdarkly-react-client-sdk";
+import { HeartFillIcon } from "@primer/octicons-react";
+import NavigationBar from "../components/navigation-bar";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <div className="App">
         <BaseStyles>
-          <PageHead />
+          <Head>
+            <title>Staff picks</title>
+            <link
+              rel="shortcut icon"
+              href={`${process.env.assetPrefix}/favicon.svg`}
+            />
+          </Head>
           <PageLayout padding="none">
             <PageLayout.Header>
               <NavigationBar />
@@ -19,7 +31,12 @@ function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </PageLayout.Content>
             <PageLayout.Footer>
-              <Footer />
+              <Box>
+                <Text sx={{ fontSize: 1, textAlign: "center" }} as="p">
+                  Made with <HeartFillIcon size={16} fill="red" /> by avid
+                  readers.
+                </Text>
+              </Box>
             </PageLayout.Footer>
           </PageLayout>
         </BaseStyles>

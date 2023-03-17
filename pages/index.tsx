@@ -1,5 +1,4 @@
-import { Box } from "@primer/react";
-import PageHeading from "../components/page-heading";
+import { Box, Heading } from "@primer/react";
 import BookList from "../components/book-list";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import Banner from "../components/banner";
@@ -53,7 +52,9 @@ export default function App() {
 
   return (
     <>
-      <PageHeading headingText="Staff Picks" />
+      <Heading sx={{ fontSize: 3, padding: "0px 12px 12px 12px" }}>
+        Staff picks
+      </Heading>
       {showBanner && <Banner />}
       <Box>
         <BookList allBooks={allBooks} />

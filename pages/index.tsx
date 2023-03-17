@@ -1,5 +1,5 @@
 import { Box, Heading } from "@primer/react";
-import BookList from "../components/book-list";
+import BookItem from "../components/book-item";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import Banner from "../components/banner";
 
@@ -57,7 +57,11 @@ export default function App() {
       </Heading>
       {showBanner && <Banner />}
       <Box>
-        <BookList allBooks={allBooks} />
+        <Box display="grid" gridTemplateColumns="1fr" gridGap={3}>
+          {allBooks.map((book) => (
+            <BookItem key={book.title} book={book} />
+          ))}
+        </Box>
       </Box>
     </>
   );

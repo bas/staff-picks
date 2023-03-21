@@ -4,7 +4,6 @@ import Image from "next/image";
 import logoPic from "../public/images/logo.png";
 import LoginForm from "./login-form";
 import Link from "next/link";
-import styles from "./NavigationBar.module.css"
 
 function NavigationBar() {
   const { showLogin } = useFlags();
@@ -20,13 +19,13 @@ function NavigationBar() {
         <Image src={logoPic} alt="logo" height="20" width="20" />
       </Header.Item>
       <Header.Item>
-        <Link className={styles.link} href="/">
-          Home
+        <Link href="/">
+          <Header.Link as="span">Home</Header.Link>
         </Link>
       </Header.Item>
       <Header.Item full>
-        <Link className={styles.link} href="/about">
-          About
+        <Link href="/about">
+          <Header.Link as="span">About</Header.Link>
         </Link>
       </Header.Item>
       {showLogin && (

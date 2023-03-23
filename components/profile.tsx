@@ -1,10 +1,8 @@
 import {
   Box,
-  TextInput,
   Button,
   Popover,
   Text,
-  IconButton,
   Heading,
 } from "@primer/react";
 import { MailIcon } from "@primer/octicons-react";

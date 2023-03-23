@@ -2,16 +2,14 @@ import {
   Box,
   TextInput,
   Button,
-  Popover,
-  Text,
   IconButton,
-  Heading,
 } from "@primer/react";
-import { PersonIcon, MailIcon, SignOutIcon } from "@primer/octicons-react";
+import { PersonIcon, SignOutIcon } from "@primer/octicons-react";
 import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
 import { getContext } from "../utils/loginHelper";
 import { UserContext } from "../types/custom-context";
+import Profile from "./profile";
 
 function LoginForm() {
   const [identity, setIdentity] = useState<any>();
@@ -81,41 +79,7 @@ function LoginForm() {
           sx={{ marginLeft: ".5rem" }}
         />
         {identity && (
-          <Box justifyContent="right" display="flex" color="black">
-            <Popover open={isOpen} caret="top-right">
-              <Popover.Content>
-                <Heading sx={{ fontSize: 2 }}>Profile</Heading>
-                <Text as="p" sx={{ whiteSpace: 'nowrap'}}>
-                  <MailIcon size={16} /> {identity.email}
-                </Text>
-                <Text as="p">Name: {identity.name}</Text>
-                <Text as="p">Country: {identity.country}</Text>
-                <Text as="p">
-                  Premium: {identity.isPremium ? "Yes" : "No"}
-                </Text>
-                <Text as="p">
-                  Staff: {identity.isStaff ? "Yes" : "No"}
-                </Text>
-                <Text as="p">
-                  Beta: {identity.isBeta ? "Yes" : "No"}
-                </Text>
-                <Text as="p">Categories: {identity.categories.join(', ')}</Text>
-                <Text as="p">Device: {identity.device}</Text>
-                <Text as="p">OS: {identity.operatingSystem}</Text>
-                <Box display="flex">
-                  <Button
-                    variant="primary"
-                    onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
-                  >
-                    Close
-                  </Button>
-                  <Button onClick={onSignOut} sx={{ marginLeft: ".5rem" }}>
-                    Sign out
-                  </Button>
-                </Box>
-              </Popover.Content>
-            </Popover>
-          </Box>
+          <Profile user={identity} isOpen={isOpen} setOpen={setOpen} />
         )}
       </Box>
     </Box>

@@ -1,19 +1,12 @@
-import {
-  Box,
-  Button,
-  Popover,
-  Text,
-  Heading,
-} from "@primer/react";
+import { Box, Button, Popover, Text, Pagehead } from "@primer/react";
 import { MailIcon } from "@primer/octicons-react";
 
 function Profile({ user, isOpen, setOpen }) {
-
   return (
     <Box justifyContent="right" display="flex" color="black">
       <Popover open={isOpen} caret="top-right">
-        <Popover.Content>
-          <Heading sx={{ fontSize: 2 }}>Profile</Heading>
+        <Popover.Content sx={{ width: "275px", top: "10px" }}>
+          <Pagehead sx={{ fontSize: 2, padding: "0px 0px 10px 0px", fontWeight: "bold" }}>Profile</Pagehead>
           <Text as="p" sx={{ whiteSpace: "nowrap" }}>
             <MailIcon size={16} /> {user.email}
           </Text>
@@ -25,14 +18,12 @@ function Profile({ user, isOpen, setOpen }) {
           <Text as="p">Categories: {user.categories.join(", ")}</Text>
           <Text as="p">Device: {user.device}</Text>
           <Text as="p">OS: {user.operatingSystem}</Text>
-          <Box display="flex">
-            <Button
-              variant="primary"
-              onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
-            >
-              Close
-            </Button>
-          </Box>
+          <Button
+            variant="primary"
+            onClick={() => (isOpen ? setOpen(false) : setOpen(true))}
+          >
+            Close
+          </Button>
         </Popover.Content>
       </Popover>
     </Box>

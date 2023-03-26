@@ -13,6 +13,7 @@ describe("App", () => {
   it("renders a heading", () => {
     mockFlags({
       showBanner: false,
+      showBookRating: true,
     });
     render(
       <ThemeProvider>

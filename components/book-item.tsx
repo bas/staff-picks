@@ -3,8 +3,13 @@ import Image from "next/image";
 import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 import { useState } from "react";
+import { Book } from "../types/book";
 
-function BookItem({ book }) {
+type BookItemProps = {
+  book: Book;
+};
+
+function BookItem({ book }: BookItemProps) {
   const { showBookRating, showBuyNowButton } = useFlags();
   const ldClient = useLDClient();
   const [isShown, setIsShown] = useState(false);
@@ -44,10 +49,12 @@ function BookItem({ book }) {
           <Text sx={{ fontSize: 1 }}>By {book.author}</Text>
         </Box>
         <Box>
-          <Text sx={{ fontSize: 1 }}>&euro;{book.price}</Text>
+          <Text sx={{ fontSize: 1 }}>&euro;{book.price.toFixed(2)}</Text>
         </Box>
         {/* if showBookRating returns true show the book rating */}
-        {showBookRating && <BookRating stars={book.rating} ratingCount={book.ratingCount} />}
+        {showBookRating && (
+          <BookRating stars={book.rating} ratingCount={book.ratingCount} />
+        )}
         {/* End of showBookRating block */}
       </Box>
       <Box>

@@ -43,7 +43,7 @@ describe("App", () => {
     expect(fireEvent.click(button[0]));
   });
 
-  it("should identify on click", () => {
+  it("calls identify on click", () => {
     render(
       <ThemeProvider>
         <LoginForm />
@@ -54,5 +54,54 @@ describe("App", () => {
 
     // assert: identify gets called
     expect(ldClientMock.identify).toBeCalled();
+  });
+
+  it("shows the rating feature", () => {
+    mockFlags({
+      showBookRating: true,
+    });
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
+
+    const ratings = screen.queryAllByText("Rating:");
+
+    expect(ratings.length).toEqual(5);
+  });
+
+  it("hides the rating feature", () => {
+    mockFlags({
+      showBookRating: false,
+    });
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
+
+    const ratings = screen.queryAllByText("Rating:");
+
+    expect(ratings.length).toEqual(0);
+  });
+
+  it("shows the rating feature", () => {
+    mockFlags({
+      showBanner: true,
+      configureBanner: {
+        text: "As a premium customer you get unlimited free shipping!",
+        variant: "success",
+      },
+    });
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
+
+    const banner = screen.queryByTestId("banner");
+
+    expect(banner).toBeInTheDocument();
   });
 });

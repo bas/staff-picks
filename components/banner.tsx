@@ -7,7 +7,7 @@ function Banner() {
   const { configureBanner } = useFlags();
 
   return (
-    <Box padding={2} sx={{ fontWeight: "bold"}}>
+    <Box data-testid="banner" padding={2} sx={{ fontWeight: "bold"}}>
       <Flash variant={configureBanner.variant}>
         <StyledOcticon icon={PinIcon} size={24} />
         {configureBanner.text}

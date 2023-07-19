@@ -219,6 +219,40 @@ resource "launchdarkly_feature_flag" "show_book_rating" {
   ]
 }
 
+resource "launchdarkly_feature_flag" "apply_book_discount" {
+  project_key = launchdarkly_project.terraform.key
+  key         = "apply-book-discount"
+  name        = "Apply book discount"
+  description = "This flag controls the book discount percentage"
+
+  variation_type = "number"
+  variations {
+    value       = "0"
+    name        = "No discount"
+    description = "Apply no discount"
+  }
+  variations {
+    value       = "10"
+    name        = "10%"
+    description = "Apply 10% discount"
+  }
+  
+    variations {
+    value       = "20"
+    name        = "20%"
+    description = "Apply 20% discount"
+  }
+  
+  defaults {
+    on_variation = 0
+    off_variation = 1
+  }
+
+  tags = [
+    "terraform",   
+  ]
+}
+
 resource "launchdarkly_flag_trigger" "show_book_rating_trigger" {
     project_key = launchdarkly_project.terraform.key
     env_key = launchdarkly_project.terraform.environments[0].key

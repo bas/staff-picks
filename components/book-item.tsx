@@ -10,9 +10,10 @@ type BookItemProps = {
 };
 
 function BookItem({ book }: BookItemProps) {
-  const { showBookRating, showBuyNowButton } = useFlags();
+  const { showBookRating, showBuyNowButton, applyBookDiscount } = useFlags();
   const ldClient = useLDClient();
   const [isShown, setIsShown] = useState(false);
+  const discount = applyBookDiscount ? applyBookDiscount : 0;
 
   return (
     <Box
@@ -49,7 +50,7 @@ function BookItem({ book }: BookItemProps) {
           <Text sx={{ fontSize: 1 }}>By {book.author}</Text>
         </Box>
         <Box>
-          <Text sx={{ fontSize: 1 }}>&euro;{book.price.toFixed(2)}</Text>
+          <Text sx={{ fontSize: 1 }}>&euro;{(book.price * ((100 - discount) / 100)).toFixed(2)}</Text>
         </Box>
         {/* if showBookRating returns true show the book rating */}
         {showBookRating && (

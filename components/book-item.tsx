@@ -50,7 +50,25 @@ function BookItem({ book }: BookItemProps) {
           <Text sx={{ fontSize: 1 }}>By {book.author}</Text>
         </Box>
         <Box>
-          <Text sx={{ fontSize: 1 }}>&euro;{(book.price * ((100 - discount) / 100)).toFixed(2)}</Text>
+          {discount > 0 ? (
+            <>
+              <Text
+                sx={{
+                  fontSize: 1,
+                  textDecoration: "line-through",
+                  color: "red",
+                }}
+              >
+                &euro;{book.price}
+              </Text>
+              &nbsp;
+              <Text sx={{ fontSize: 1 }}>
+                &euro;{(book.price * ((100 - discount) / 100)).toFixed(2)}
+              </Text>
+            </>
+          ) : (
+            <Text sx={{ fontSize: 1 }}>&euro;{book.price}</Text>
+          )}
         </Box>
         {/* if showBookRating returns true show the book rating */}
         {showBookRating && (

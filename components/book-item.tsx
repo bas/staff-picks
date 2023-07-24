@@ -59,7 +59,7 @@ function BookItem({ book }: BookItemProps) {
                   color: "red",
                 }}
               >
-                &euro;{book.price}
+                &euro;{book.price.toFixed(2)}
               </Text>
               &nbsp;
               <Text sx={{ fontSize: 2 }}>

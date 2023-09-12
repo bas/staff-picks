@@ -9,6 +9,7 @@ const nextConfig = {
   env: {
     assetPrefix: isProd ? process.env.REPO_NAME : "",
     clientSideID: process.env.LAUNCHDARKLY_CLIENT_ID,
+    gitSHA: isProd ? process.env.GIT_SHA : "",
   },
   output: 'standalone',
 }

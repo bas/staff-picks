@@ -50,6 +50,10 @@ export default withLDProvider({
   context: { kind: "user", key: "anon", anonymous: true },
   options: {
     bootstrap: "localStorage",
+    application: {
+      id: "bas-staff-picks",
+      version: process.env.gitSHA,
+    }
   },
   reactOptions: {
     useCamelCaseFlagKeys: true,

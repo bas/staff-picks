@@ -13,12 +13,6 @@ Go to http://localhost:3000/ in your browser to visit the web app. You should se
 
 <img width="1074" alt="Screenshot 2022-12-18 at 12 20 57" src="https://user-images.githubusercontent.com/1982588/208295564-d9c7890f-3911-40f9-b994-27a7b528e00d.png">
 
-For LaunchDarkly to work you need to add a `.env` file with the following:
-
-```
-LAUNCHDARKLY_CLIENT_ID=<Your Client ID>
-```
-
 ## Docker
 
 To run in Docker, first build the image:

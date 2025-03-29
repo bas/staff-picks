@@ -6,12 +6,12 @@ import { Book } from "../types/book";
 
 type BookItemProps = {
   book: Book;
+  showBuyNowButton?: boolean;
 };
 
-function BookItem({ book }: BookItemProps) {
+function BookItem({ book, showBuyNowButton = false }: BookItemProps) {
   const showBookRating = true;
-  const showBuyNowButton = true;
-  const applyBookDiscount = 10;
+  const applyBookDiscount = 0;
 
   const [isShown, setIsShown] = useState(false);
   const discount = applyBookDiscount ? applyBookDiscount : 0;

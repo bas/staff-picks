@@ -5,7 +5,7 @@ function Banner() {
 
   const configureBanner = {
     variant: "default", // Replace with an appropriate default variant
-    text: "Welcome to our platform!" // Replace with a default message
+    text: "Sign up now and get 10% discount" // Replace with a default message
   };
 
   return (

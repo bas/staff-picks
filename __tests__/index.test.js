@@ -3,6 +3,16 @@ import App from "../pages/index";
 import "@testing-library/jest-dom";
 import { ThemeProvider } from "@primer/react";
 import LoginForm from "../components/login-form";
+import BookItem from "../components/book-item";
+
+const mockBook = {
+  title: "Sample Book",
+  author: "Author Name",
+  price: 20,
+  rating: 4,
+  ratingCount: 100,
+  cover: "/images/sample.jpg",
+};
 
 describe("App", () => {
   it("renders a heading", () => {
@@ -22,12 +32,13 @@ describe("App", () => {
   it("clicks the buy now button", () => {
     render(
       <ThemeProvider>
-        <App />
+        <BookItem book={mockBook} showBuyNowButton={true} />
       </ThemeProvider>
     );
 
-    const button = screen.getAllByRole("button", { name: /Buy now/i });
-    expect(fireEvent.click(button[0]));
+    const button = screen.getByRole("button", { name: /Buy now/i });
+    expect(button).toBeEnabled();
+    fireEvent.click(button);
   });
 
   it("calls identify on click", () => {
@@ -38,5 +49,16 @@ describe("App", () => {
     );
     const signInButton = screen.getAllByRole("button", { name: /Sign in/i });
     fireEvent.click(signInButton[0]);
+  });
+
+  it("clicks the add to cart button", () => {
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
+
+    const addToCartButton = screen.getAllByRole("button", { name: /Add to cart/i });
+    expect(fireEvent.click(addToCartButton[0]));
   });
 });

@@ -1,10 +1,19 @@
-/** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
+
+  swcMinify: true,
   images: {
-    unoptimized: true, // Disable server-side image optimization for static export
+    unoptimized: true
   },
-  trailingSlash: true, // Ensure trailing slashes for static export
-};
+  env: {
+    assetPrefix: isProd ? process.env.REPO_NAME : "",
+    clientSideID: process.env.LAUNCHDARKLY_CLIENT_ID,
+    gitSHA: isProd ? process.env.GIT_SHA : "",
+  },
+  output: 'standalone',
+}
 
 module.exports = nextConfig;

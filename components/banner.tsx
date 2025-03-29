@@ -2,9 +2,8 @@ import { StyledOcticon, Flash, Box } from "@primer/react";
 import { PinIcon } from "@primer/octicons-react";
 
 function Banner() {
-
   const configureBanner = {
-    variant: "default", // Replace with an appropriate default variant
+    variant: "default" as "default" | "success" | "danger" | "warning", // Ensure the variant is one of the allowed types
     text: "Sign up now and get 10% discount" // Replace with a default message
   };
 

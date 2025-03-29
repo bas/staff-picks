@@ -1,4 +1,4 @@
-name: Provision LaunchDarkly
+name: Provision Infrastructure
 
 on:
   workflow_dispatch:
@@ -17,9 +17,6 @@ jobs:
     name: Terraform plan & apply
     runs-on: ubuntu-latest
     
-    outputs:
-      client_side_id: ${{ steps.tf_output.outputs.client_side_id }}
-      
     defaults:
       run:
         shell: bash
@@ -52,13 +49,4 @@ jobs:
       run: terraform apply -auto-approve
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TF_VAR_LAUNCHDARKLY_ACCESS_TOKEN: ${{ secrets.LD_ACCESS_TOKEN }}
-        TF_VAR_project: ${{ env.OWNER }}-${{ env.REPO_NAME }} 
-
-    - name: Terraform output
-      id: tf_output
-      run: |
-        CLIENT_SIDE_ID=$(terraform output -raw launchdarkly_client_side_id)
-        echo "client_side_id=$CLIENT_SIDE_ID" >> $GITHUB_OUTPUT
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_VAR_project: ${{ env.OWNER }}-${{ env.REPO_NAME }}

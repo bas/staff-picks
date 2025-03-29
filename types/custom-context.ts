@@ -1,8 +1,4 @@
-import {
-  LDSingleKindContext,
-} from "launchdarkly-js-client-sdk";
-
-export interface UserContext extends LDSingleKindContext {
+export interface UserContext {
   email?: string;
   name?: string;
   country?: string;

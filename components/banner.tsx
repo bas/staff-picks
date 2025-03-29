@@ -1,10 +1,12 @@
 import { StyledOcticon, Flash, Box } from "@primer/react";
 import { PinIcon } from "@primer/octicons-react";
-import { useFlags } from "launchdarkly-react-client-sdk";
 
 function Banner() {
 
-  const { configureBanner } = useFlags();
+  const configureBanner = {
+    variant: "default", // Replace with an appropriate default variant
+    text: "Welcome to our platform!" // Replace with a default message
+  };
 
   return (
     <Box data-testid="banner" padding={2} sx={{ fontWeight: "bold"}}>

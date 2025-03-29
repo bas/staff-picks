@@ -1,13 +1,9 @@
 import { Header } from "@primer/react";
-import { useFlags } from "launchdarkly-react-client-sdk";
-import Image from "next/image";
-import logoPic from "../public/images/logo.png";
+import { MarkGithubIcon } from "@primer/octicons-react";
 import LoginForm from "./login-form";
 import Link from "next/link";
 
 function NavigationBar() {
-  const { showLogin } = useFlags();
-
   return (
     <Header
       sx={{
@@ -16,7 +12,7 @@ function NavigationBar() {
       }}
     >
       <Header.Item>
-        <Image src={logoPic} alt="logo" height="20" width="20" />
+        <MarkGithubIcon size={20} />
       </Header.Item>
       <Header.Item>
         <Link href="/">
@@ -28,11 +24,9 @@ function NavigationBar() {
           <Header.Link as="span">About</Header.Link>
         </Link>
       </Header.Item>
-      {showLogin && (
-        <Header.Item>
-          <LoginForm />
-        </Header.Item>
-      )}
+      <Header.Item>
+        <LoginForm />
+      </Header.Item>
     </Header>
   );
 }

@@ -5,7 +5,6 @@ import {
   IconButton,
 } from "@primer/react";
 import { PersonIcon, SignOutIcon } from "@primer/octicons-react";
-import { useLDClient } from "launchdarkly-react-client-sdk";
 import { useState, useEffect } from "react";
 import { getContext } from "../utils/loginHelper";
 import { UserContext } from "../types/custom-context";
@@ -15,35 +14,18 @@ function LoginForm() {
   const [identity, setIdentity] = useState<any>();
   const [isOpen, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
-  const ldClient = useLDClient();
 
   useEffect(() => {}, [isOpen]);
 
   async function onSignOut() {
     setIdentity(null);
-
-    if (ldClient) {
-      ldClient.identify({ key: "anon", anonymous: true });
-
-      setName("");
-    }
+    setName("");
   }
 
   async function onSignIn() {
     const newUser: UserContext = getContext({ name: name });
-
     setIdentity(newUser);
-
-    if (ldClient) {
-      ldClient.identify(newUser, null, () => {
-        console.log("New user's flags available");
-
-        const userFlags = ldClient.allFlags();
-        console.log(userFlags);
-      });
-
-      setName(newUser.name);
-    }
+    setName(newUser.name);
   }
 
   return (

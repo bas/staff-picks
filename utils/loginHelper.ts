@@ -69,8 +69,7 @@ export function getContext({ name }) {
     .slice(0, Math.floor(Math.random() * 4) + 1);
 
   const userContext: UserContext = {
-    kind: "user",
-    key: hashCode(email),
+    id: hashCode(email),
     email: email,
     name: randomName,
     country: randomCountry,
@@ -80,9 +79,6 @@ export function getContext({ name }) {
     categories: categoryList,
     device: deviceType,
     operatingSystem: osName,
-    _meta: {
-      privateAttributes: ["email"],
-    },
   };
 
   return userContext;

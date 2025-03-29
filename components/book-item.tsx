@@ -1,17 +1,18 @@
 import { Box, Text, Button } from "@primer/react";
 import Image from "next/image";
-import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import BookRating from "./book-rating";
 import { useState } from "react";
 import { Book } from "../types/book";
 
 type BookItemProps = {
   book: Book;
+  showBuyNowButton?: boolean;
 };
 
-function BookItem({ book }: BookItemProps) {
-  const { showBookRating, showBuyNowButton, applyBookDiscount } = useFlags();
-  const ldClient = useLDClient();
+function BookItem({ book, showBuyNowButton = false }: BookItemProps) {
+  const showBookRating = true;
+  const applyBookDiscount = 0;
+
   const [isShown, setIsShown] = useState(false);
   const discount = applyBookDiscount ? applyBookDiscount : 0;
 
@@ -81,7 +82,7 @@ function BookItem({ book }: BookItemProps) {
           <Button
             variant={showBuyNowButton ? "default" : "primary"}
             sx={{ float: "right" }}
-            onClick={() => ldClient.track("add-to-cart")}
+            onClick={() => console.log("Add to cart")}
           >
             Add to cart
           </Button>
@@ -91,7 +92,7 @@ function BookItem({ book }: BookItemProps) {
             <Button
               variant="primary"
               sx={{ float: "right" }}
-              onClick={() => ldClient.track("buy-now")}
+              onClick={() => console.log("Buy now")}
             >
               Buy now
             </Button>

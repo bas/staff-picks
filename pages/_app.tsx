@@ -20,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
             <title>Staff picks</title>
             <link
               rel="shortcut icon"
-              href={`${process.env.assetPrefix}/favicon.svg`}
+              href={`${process.env.assetPrefix}/favicon.png`}
             />
           </Head>
           <PageLayout padding="none">

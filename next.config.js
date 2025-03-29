@@ -1,17 +1,19 @@
-const isProd = process.env.NODE_ENV === "production";
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
 
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  distDir: 'out',
-  images: {
-    unoptimized: true
-  },
-  env: {
-    assetPrefix: isProd ? process.env.REPO_NAME : "",
-    gitSHA: isProd ? process.env.GIT_SHA : "",
-  },
-  output: 'standalone',
+let assetPrefix = "";
+let basePath = "";
+
+if (isGithubActions) {
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*\//, "");
+  assetPrefix = `/${repo}/`;
+  basePath = `/${repo}`;
 }
 
-module.exports = nextConfig;
+module.exports = {
+  assetPrefix,
+  basePath,
+  images: {
+    unoptimized: true, // Disable server-side image optimization for static export
+  },
+  trailingSlash: true, // Ensure trailing slashes for static export
+};
